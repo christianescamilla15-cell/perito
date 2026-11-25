@@ -54,7 +54,7 @@ C4Container
 C4Component
   title Componentes · propuesta de triaje
   Container_Boundary(app, "Perito.Application") {
-    Component(manejador, "ManejadoresDeTriaje", "IManejador<ProponerTriaje>", "Carga siniestro, póliza y titular; seudonimiza; guarda la propuesta validada")
+    Component(manejador, "ManejadoresDeTriaje", "manejador de ProponerTriaje", "Carga siniestro, póliza y titular; seudonimiza; guarda la propuesta validada")
     Component(seud, "Seudonimizador", "Domain.Privacidad", "Única fábrica de TextoSeudonimizado")
     Component(validador, "ValidadorDePropuesta", "estático", "Catálogo del ramo, cita sustentada, cobertura y contratación calculadas")
     Component(consulta, "ConsultarCoberturasDelSiniestro", "IConsulta", "Carátula sin datos personales")

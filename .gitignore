@@ -4,6 +4,9 @@ obj/
 TestResults/
 resultados/
 *.trx
+# Artefactos de front y paquetes (no hay front en la etapa 1; se excluyen por si acaso)
+node_modules/
+dist/
 # ── Python (herramientas) ─────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
