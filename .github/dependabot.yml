@@ -7,6 +7,19 @@ updates:
     groups:                       # menores y parches juntos: un PR por semana; las mayores van solas
       nuget-menores:
         update-types: [minor, patch]
+    ignore:                       # .NET 10 (LTS): los paquetes que siguen la versión del runtime no saltan de mayor
+      - dependency-name: 'Microsoft.Extensions.*'
+        update-types: [version-update:semver-major]
+      - dependency-name: 'Microsoft.EntityFrameworkCore*'
+        update-types: [version-update:semver-major]
+      - dependency-name: 'Microsoft.AspNetCore.*'
+        update-types: [version-update:semver-major]
+      - dependency-name: 'System.*'
+        update-types: [version-update:semver-major]
+      - dependency-name: 'dotnet-ef'
+        update-types: [version-update:semver-major]
+      - dependency-name: 'Npgsql.EntityFrameworkCore.PostgreSQL'
+        update-types: [version-update:semver-major]
     open-pull-requests-limit: 5
   - package-ecosystem: dotnet-sdk
     directory: /
