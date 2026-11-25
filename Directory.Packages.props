@@ -7,8 +7,9 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.15" />
     <PackageVersion Include="Microsoft.SemanticKernel.Core" Version="1.82.0" />
-    <!-- El conector de Ollama de Semantic Kernel sólo se publica como alfa (SKEXP0070); ver docs/adr/0004. -->
-    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.82.0-alpha" />
+    <!-- Ollama: el servicio dedicado del conector alfa de SK está obsoleto y recomienda el IChatClient de OllamaSharp
+         adaptado con AsChatCompletionService (docs/adr/0004). -->
+    <PackageVersion Include="OllamaSharp" Version="5.5.2" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.15" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />

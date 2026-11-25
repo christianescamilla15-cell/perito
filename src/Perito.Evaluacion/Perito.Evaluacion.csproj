@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- perito-eval: corre el conjunto versionado (eval/) contra el asistente con un proveedor y tres contextos
+       (normal, vacío y barajado) y escribe el informe y la compuerta. Usa la composición en memoria de Application. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Perito.Evaluacion</RootNamespace>
+    <AssemblyName>perito-eval</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Asistente\Perito.Asistente.csproj" />
+    <ProjectReference Include="..\Perito.EnMemoria\Perito.EnMemoria.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,22 @@
+{
+  "_nota": "Compuerta del CI con el modelo extractivo (determinista): los criterios de salida de docs/PLAN.md. Una corrida con Ollama se reporta aparte y no pasa por aquí.",
+  "normal": {
+    "clasificacion_min": 0.85,
+    "cita_min": 0.85,
+    "datos_f1_min": 0.80,
+    "recuperacion_de_la_cobertura_min": 0.95,
+    "respuestas_legibles_min": 1.0,
+    "llamadas_a_funcion_min": 1.0,
+    "pii_en_prompts_max": 0
+  },
+  "vacio": {
+    "clasificacion_max": 0.0,
+    "cita_max": 0.0,
+    "pii_en_prompts_max": 0
+  },
+  "barajado": {
+    "cita_max": 0.40,
+    "pii_en_prompts_max": 0
+  },
+  "caida_minima_de_cita": 0.50
+}

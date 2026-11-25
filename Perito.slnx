@@ -1,11 +1,14 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Perito.Application/Perito.Application.csproj" />
+    <Project Path="src/Perito.Asistente/Perito.Asistente.csproj" />
     <Project Path="src/Perito.Domain/Perito.Domain.csproj" />
     <Project Path="src/Perito.EnMemoria/Perito.EnMemoria.csproj" />
+    <Project Path="src/Perito.Evaluacion/Perito.Evaluacion.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Perito.Application.Tests/Perito.Application.Tests.csproj" />
+    <Project Path="tests/Perito.Asistente.Tests/Perito.Asistente.Tests.csproj" />
     <Project Path="tests/Perito.Domain.Tests/Perito.Domain.Tests.csproj" />
   </Folder>
 </Solution>

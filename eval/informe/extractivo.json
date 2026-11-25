@@ -1,0 +1,3539 @@
+{
+  "proveedor": "extractivo",
+  "modelo": "extractivo-v1",
+  "huella_del_conjunto": "cd2b370fe53b2960",
+  "corridas": [
+    {
+      "contexto": "normal",
+      "metricas": {
+        "casos": 50,
+        "clasificacion": 0.86,
+        "cita": 0.86,
+        "cobertura": 0.9,
+        "datos_precision": 0.8367,
+        "datos_recall": 0.8913,
+        "datos_f1": 0.8632,
+        "datos_exactos": 0.9,
+        "exclusiones_precision": 1,
+        "exclusiones_recall": 0.4545,
+        "senales_precision": 1,
+        "senales_recall": 1,
+        "recuperacion_de_la_cobertura": 0.98,
+        "recuperacion_de_exclusiones": 0.8182,
+        "respuestas_legibles": 1,
+        "llamadas_a_funcion": 1,
+        "pii_en_prompts": 0,
+        "latencia_media_ms": null,
+        "latencia_p95_ms": null
+      },
+      "casos": [
+        {
+          "id": "S01",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.1-a",
+            "AUT-2.1-d",
+            "AUT-2.1-c",
+            "AUT-4.4",
+            "AUT-4.2",
+            "AUT-4.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S02",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-c"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S03",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.2",
+            "AUT-2.4",
+            "AUT-2.3",
+            "AUT-4.5",
+            "AUT-4.4",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S04",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.1-b",
+            "AUT-2.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S05",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [],
+          "exclusiones": [
+            "AUT-4.3"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.5",
+            "AUT-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S06",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [],
+          "exclusiones": [
+            "AUT-4.2"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a",
+            "AUT-2.4",
+            "AUT-4.2",
+            "AUT-4.5",
+            "AUT-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S07",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S08",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "Lugar",
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S09",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [
+            "AUT-4.4"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S10",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": "FenomenoNaturalAuto",
+          "clausula": "AUT-2.1-c",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-2.2",
+            "AUT-2.5",
+            "AUT-4.4",
+            "AUT-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S11",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": "FenomenoNaturalAuto",
+          "clausula": "AUT-2.1-c",
+          "datos_faltantes": [
+            "Fotografias"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-c",
+            "AUT-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S12",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [
+            "DenunciaAnteMinisterioPublico"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2",
+            "AUT-2.1-c"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S13",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": "IncendioDeVehiculo",
+          "clausula": "AUT-2.1-d",
+          "datos_faltantes": [
+            "DictamenDeBomberos"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-d"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S14",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": "IncendioDeVehiculo",
+          "clausula": "AUT-2.1-d",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-d",
+            "AUT-2.2",
+            "AUT-2.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S15",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S16",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [
+            "DenunciaAnteMinisterioPublico"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S17",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [
+            "Lugar",
+            "DenunciaAnteMinisterioPublico"
+          ],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "AUT-2.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S18",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [],
+          "exclusiones": [
+            "AUT-4.2"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2",
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-c",
+            "AUT-4.2",
+            "AUT-4.5",
+            "AUT-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S19",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": "DanosATercerosAuto",
+          "clausula": "AUT-2.3",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-a",
+            "AUT-2.1-c",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S20",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": "DanosATercerosAuto",
+          "clausula": "AUT-2.3",
+          "datos_faltantes": [
+            "DatosDelTercero"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.4",
+            "AUT-2.1-a",
+            "AUT-2.1-d",
+            "AUT-4.5",
+            "AUT-4.1",
+            "AUT-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S21",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": "DanosATercerosAuto",
+          "clausula": "AUT-2.3",
+          "datos_faltantes": [
+            "Lugar"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S22",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": "LesionesAOcupantes",
+          "clausula": "AUT-2.4",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.4",
+            "AUT-2.1-a",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S23",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S24",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.5",
+            "AUT-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S25",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.5",
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S26",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [
+            "Lugar",
+            "DenunciaAnteMinisterioPublico"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2",
+            "AUT-2.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S27",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.5",
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S28",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S29",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "DictamenDeBomberos",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-4.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S30",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b",
+            "HOG-2.5",
+            "HOG-2.2",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S31",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "DictamenDeBomberos",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.4-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S32",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": "Explosion",
+          "clausula": "HOG-2.1-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S33",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": "Explosion",
+          "clausula": "HOG-2.1-b",
+          "datos_faltantes": [
+            "DictamenDeBomberos",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.2",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-4.4",
+            "HOG-4.3",
+            "HOG-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S34",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.5",
+            "HOG-2.4-b",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S35",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": "DanosPorAgua",
+          "clausula": "HOG-2.2",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [
+            "HOG-4.1"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.2",
+            "HOG-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S36",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": "DanosPorAgua",
+          "clausula": "HOG-2.2",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.2",
+            "HOG-2.4-a",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.1",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S37",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": "DanosPorAgua",
+          "clausula": "HOG-2.2",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.2",
+            "HOG-2.4-a",
+            "HOG-2.5",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S38",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "RoboEnVivienda",
+          "clausula": "HOG-2.3",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S39",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "RoboEnVivienda",
+          "clausula": "HOG-2.3",
+          "datos_faltantes": [
+            "DenunciaAnteMinisterioPublico",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S40",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "RoboEnVivienda",
+          "clausula": "HOG-2.3",
+          "datos_faltantes": [
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "BienesSinComprobante"
+          ],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S41",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "RoboEnVivienda",
+          "clausula": "HOG-2.3",
+          "datos_faltantes": [
+            "DenunciaAnteMinisterioPublico",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-2.4-a",
+            "HOG-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S42",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S43",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.3",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S44",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": "GranizoOViento",
+          "clausula": "HOG-2.4-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-b",
+            "HOG-2.2",
+            "HOG-2.4-a",
+            "HOG-2.5",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S45",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": "GranizoOViento",
+          "clausula": "HOG-2.4-b",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S46",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": "DanosATercerosHogar",
+          "clausula": "HOG-2.5",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S47",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": "DanosATercerosHogar",
+          "clausula": "HOG-2.5",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion",
+            "DatosDelTercero"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S48",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": "DanosATercerosHogar",
+          "clausula": "HOG-2.5",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.4-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S49",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [
+            "RelatoContradictorio"
+          ],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S50",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "DanosATercerosHogar",
+          "clausula": "HOG-2.5",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion",
+            "DatosDelTercero"
+          ],
+          "exclusiones": [],
+          "senales": [
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.3",
+            "HOG-4.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        }
+      ]
+    },
+    {
+      "contexto": "vacio",
+      "metricas": {
+        "casos": 50,
+        "clasificacion": 0,
+        "cita": 0,
+        "cobertura": 0,
+        "datos_precision": 1,
+        "datos_recall": 0,
+        "datos_f1": 0,
+        "datos_exactos": 0.36,
+        "exclusiones_precision": 1,
+        "exclusiones_recall": 0,
+        "senales_precision": 1,
+        "senales_recall": 1,
+        "recuperacion_de_la_cobertura": 0,
+        "recuperacion_de_exclusiones": 0,
+        "respuestas_legibles": 1,
+        "llamadas_a_funcion": 1,
+        "pii_en_prompts": 0,
+        "latencia_media_ms": null,
+        "latencia_p95_ms": null
+      },
+      "casos": [
+        {
+          "id": "S01",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S02",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S03",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S04",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S05",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S06",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S07",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S08",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S09",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S10",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S11",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S12",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S13",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S14",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S15",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S16",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S17",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S18",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S19",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S20",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S21",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S22",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S23",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S24",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S25",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S26",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S27",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S28",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S29",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S30",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S31",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S32",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S33",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S34",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S35",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S36",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S37",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S38",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S39",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S40",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "BienesSinComprobante"
+          ],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S41",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S42",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S43",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S44",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S45",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S46",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S47",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S48",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S49",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "RelatoContradictorio"
+          ],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S50",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        }
+      ]
+    },
+    {
+      "contexto": "barajado",
+      "metricas": {
+        "casos": 50,
+        "clasificacion": 0.34,
+        "cita": 0.34,
+        "cobertura": 0.38,
+        "datos_precision": 0.6774,
+        "datos_recall": 0.4565,
+        "datos_f1": 0.5455,
+        "datos_exactos": 0.52,
+        "exclusiones_precision": 1,
+        "exclusiones_recall": 0.0909,
+        "senales_precision": 1,
+        "senales_recall": 1,
+        "recuperacion_de_la_cobertura": 0.42,
+        "recuperacion_de_exclusiones": 0.3636,
+        "respuestas_legibles": 1,
+        "llamadas_a_funcion": 1,
+        "pii_en_prompts": 0,
+        "latencia_media_ms": null,
+        "latencia_p95_ms": null
+      },
+      "casos": [
+        {
+          "id": "S01",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S02",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S03",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S04",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S05",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S06",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S07",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-2.2",
+            "AUT-2.5",
+            "AUT-4.4",
+            "AUT-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S08",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "Lugar",
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-2.2",
+            "AUT-2.5",
+            "AUT-4.4",
+            "AUT-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S09",
+          "esperado": "Vuelco AUT-2.1-b",
+          "tipo": "Vuelco",
+          "clausula": "AUT-2.1-b",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [
+            "AUT-4.4"
+          ],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-2.2",
+            "AUT-2.5",
+            "AUT-4.4",
+            "AUT-4.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S10",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-d"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S11",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-d"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S12",
+          "esperado": "FenomenoNaturalAuto AUT-2.1-c",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-d"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S13",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S14",
+          "esperado": "IncendioDeVehiculo AUT-2.1-d",
+          "tipo": "RoboTotal",
+          "clausula": "AUT-2.2",
+          "datos_faltantes": [
+            "DenunciaAnteMinisterioPublico"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.2"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S15",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-a",
+            "AUT-2.1-c",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S16",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-a",
+            "AUT-2.1-c",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S17",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-a",
+            "AUT-2.1-c",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S18",
+          "esperado": "RoboTotal AUT-2.2",
+          "tipo": "DanosATercerosAuto",
+          "clausula": "AUT-2.3",
+          "datos_faltantes": [
+            "DatosDelTercero"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.3",
+            "AUT-2.1-d",
+            "AUT-2.1-a",
+            "AUT-2.1-c",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S19",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.4",
+            "AUT-2.1-a",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S20",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": "LesionesAOcupantes",
+          "clausula": "AUT-2.4",
+          "datos_faltantes": [
+            "InformeMedico"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.4",
+            "AUT-2.1-a",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S21",
+          "esperado": "DanosATercerosAuto AUT-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.4",
+            "AUT-2.1-a",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S22",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.5",
+            "AUT-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S23",
+          "esperado": "LesionesAOcupantes AUT-2.4",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "AUT-2.5",
+            "AUT-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S24",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.5",
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S25",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.5",
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S26",
+          "esperado": "RoturaDeCristales AUT-2.5",
+          "tipo": "RoturaDeCristales",
+          "clausula": "AUT-2.5",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-a",
+            "AUT-2.5",
+            "AUT-2.1-c",
+            "AUT-2.1-b",
+            "AUT-4.5",
+            "AUT-4.1"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S27",
+          "esperado": "Colision AUT-2.1-a",
+          "tipo": "Colision",
+          "clausula": "AUT-2.1-a",
+          "datos_faltantes": [
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "AUT-2.1-b",
+            "AUT-2.5",
+            "AUT-2.1-a"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S28",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S29",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "DictamenDeBomberos",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S30",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S31",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": "IncendioDeVivienda",
+          "clausula": "HOG-2.1-a",
+          "datos_faltantes": [
+            "DictamenDeBomberos",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-b",
+            "HOG-2.1-a",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S32",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [
+            "Fotografias"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.5",
+            "HOG-2.4-b",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S33",
+          "esperado": "Explosion HOG-2.1-b",
+          "tipo": "DanosPorAgua",
+          "clausula": "HOG-2.2",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.5",
+            "HOG-2.4-b",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S34",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S35",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S36",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S37",
+          "esperado": "DanosPorAgua HOG-2.2",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.3",
+            "HOG-4.2",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S38",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S39",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S40",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "SinTestigosNiEvidencia",
+            "BienesSinComprobante"
+          ],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S41",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [
+            "Fotografias",
+            "InventarioDeBienes"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-a",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.5",
+            "HOG-4.2",
+            "HOG-4.3",
+            "HOG-4.4"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S42",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": "InundacionPorLluvia",
+          "clausula": "HOG-2.4-a",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-b",
+            "HOG-2.2",
+            "HOG-2.4-a",
+            "HOG-2.5",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S43",
+          "esperado": "InundacionPorLluvia HOG-2.4-a",
+          "tipo": "DanosPorAgua",
+          "clausula": "HOG-2.2",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.4-b",
+            "HOG-2.2",
+            "HOG-2.4-a",
+            "HOG-2.5",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S44",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": "GranizoOViento",
+          "clausula": "HOG-2.4-b",
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S45",
+          "esperado": "GranizoOViento HOG-2.4-b",
+          "tipo": "GranizoOViento",
+          "clausula": "HOG-2.4-b",
+          "datos_faltantes": [
+            "Fotografias",
+            "PresupuestoDeReparacion"
+          ],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-2.4-a",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [],
+          "tipo_correcto": true,
+          "cita_correcta": true,
+          "datos_exactos": true
+        },
+        {
+          "id": "S46",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": true
+        },
+        {
+          "id": "S47",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S48",
+          "esperado": "DanosATercerosHogar HOG-2.5",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S49",
+          "esperado": "IncendioDeVivienda HOG-2.1-a",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "RelatoContradictorio"
+          ],
+          "recuperadas": [
+            "HOG-2.5",
+            "HOG-2.3",
+            "HOG-4.5"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        },
+        {
+          "id": "S50",
+          "esperado": "RoboEnVivienda HOG-2.3",
+          "tipo": null,
+          "clausula": null,
+          "datos_faltantes": [],
+          "exclusiones": [],
+          "senales": [
+            "ContratacionReciente",
+            "PresionPorPagoRapido"
+          ],
+          "recuperadas": [
+            "HOG-2.1-a",
+            "HOG-2.1-b",
+            "HOG-2.2",
+            "HOG-2.4-b",
+            "HOG-4.5",
+            "HOG-4.4",
+            "HOG-4.3"
+          ],
+          "llamo_funcion": true,
+          "pii_en_prompt": 0,
+          "latencia_ms": null,
+          "observaciones": [
+            "el modelo no propuso tipo",
+            "el modelo no citó una cláusula"
+          ],
+          "tipo_correcto": false,
+          "cita_correcta": false,
+          "datos_exactos": false
+        }
+      ]
+    }
+  ]
+}

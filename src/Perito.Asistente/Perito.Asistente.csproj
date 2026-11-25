@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Asistente de triaje con Semantic Kernel: RAG (BM25) sobre las condiciones generales, función de consulta de la
+       póliza vía Application y proveedor intercambiable (modelo extractivo determinista u Ollama). -->
+  <PropertyGroup>
+    <RootNamespace>Perito.Asistente</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Application\Perito.Application.csproj" />
+    <PackageReference Include="Microsoft.SemanticKernel.Core" />
+    <PackageReference Include="OllamaSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Una sola fuente: el documento que se publica en docs/ es el corpus que se indexa. -->
+    <EmbeddedResource Include="..\..\docs\condiciones\condiciones-generales.md" LogicalName="condiciones-generales.md" />
+  </ItemGroup>
+</Project>
