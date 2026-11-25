@@ -1,0 +1,38 @@
+{
+  "_nota": "Carátulas ficticias de la evaluación. Montos en pesos. Deducible: tipo Fijo (monto), PorcentajeSuma o PorcentajePerdida (fracción).",
+  "auto-amplia": {
+    "ramo": "Auto",
+    "coberturas": [
+      { "cobertura": "DanosMateriales", "suma": 350000.00, "deducible": { "tipo": "PorcentajeSuma", "valor": 0.05 }, "coaseguro": 0 },
+      { "cobertura": "RoboTotal", "suma": 350000.00, "deducible": { "tipo": "PorcentajeSuma", "valor": 0.10 }, "coaseguro": 0 },
+      { "cobertura": "ResponsabilidadCivilAuto", "suma": 1500000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 },
+      { "cobertura": "GastosMedicosOcupantes", "suma": 200000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 },
+      { "cobertura": "Cristales", "suma": 30000.00, "deducible": { "tipo": "PorcentajePerdida", "valor": 0.20 }, "coaseguro": 0 }
+    ]
+  },
+  "auto-limitada": {
+    "ramo": "Auto",
+    "coberturas": [
+      { "cobertura": "RoboTotal", "suma": 220000.00, "deducible": { "tipo": "PorcentajeSuma", "valor": 0.10 }, "coaseguro": 0 },
+      { "cobertura": "ResponsabilidadCivilAuto", "suma": 1000000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 },
+      { "cobertura": "GastosMedicosOcupantes", "suma": 150000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 }
+    ]
+  },
+  "hogar-completa": {
+    "ramo": "Hogar",
+    "coberturas": [
+      { "cobertura": "Incendio", "suma": 2500000.00, "deducible": { "tipo": "Fijo", "valor": 5000.00 }, "coaseguro": 0 },
+      { "cobertura": "DanosPorAgua", "suma": 150000.00, "deducible": { "tipo": "Fijo", "valor": 3000.00 }, "coaseguro": 0 },
+      { "cobertura": "RoboDeContenidos", "suma": 250000.00, "deducible": { "tipo": "PorcentajePerdida", "valor": 0.10 }, "coaseguro": 0 },
+      { "cobertura": "FenomenosHidrometeorologicos", "suma": 2500000.00, "deducible": { "tipo": "PorcentajeSuma", "valor": 0.02 }, "coaseguro": 0.10 },
+      { "cobertura": "ResponsabilidadCivilFamiliar", "suma": 1000000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 }
+    ]
+  },
+  "hogar-basica": {
+    "ramo": "Hogar",
+    "coberturas": [
+      { "cobertura": "Incendio", "suma": 1200000.00, "deducible": { "tipo": "Fijo", "valor": 5000.00 }, "coaseguro": 0 },
+      { "cobertura": "ResponsabilidadCivilFamiliar", "suma": 500000.00, "deducible": { "tipo": "Fijo", "valor": 0 }, "coaseguro": 0 }
+    ]
+  }
+}

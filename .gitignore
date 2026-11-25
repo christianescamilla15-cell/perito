@@ -1,0 +1,29 @@
+# ── .NET ──────────────────────────────────────────────────────────────────
+bin/
+obj/
+TestResults/
+resultados/
+*.trx
+# ── Python (herramientas) ─────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+.venv-calidad/
+.ruff_cache/
+# Reportes de los escaneos del CI (se suben como artefactos)
+*.sarif
+semgrep.json
+trivy.json
+gitleaks.log
+sbom.spdx.json
+# Corridas de la evaluación que no son el informe versionado
+eval/corridas/
+# ── Configuración local / secretos ────────────────────────────────────────
+.env
+.env.*
+appsettings.Local.json
+# ── Editores y sistema operativo ──────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
