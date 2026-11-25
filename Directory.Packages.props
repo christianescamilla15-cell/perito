@@ -7,6 +7,8 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.15" />
     <PackageVersion Include="Microsoft.SemanticKernel.Core" Version="1.82.0" />
+    <!-- Groq expone un API compatible con OpenAI: el conector OpenAI de SK con endpoint propio (docs/adr/0009). -->
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.82.0" />
     <!-- Ollama: el servicio dedicado del conector alfa de SK está obsoleto y recomienda el IChatClient de OllamaSharp
          adaptado con AsChatCompletionService (docs/adr/0004). -->
     <PackageVersion Include="OllamaSharp" Version="5.5.2" />

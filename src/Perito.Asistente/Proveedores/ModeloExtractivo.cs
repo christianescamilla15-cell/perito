@@ -111,13 +111,10 @@ public sealed partial class ModeloExtractivo : IChatCompletionService
             using var doc = JsonDocument.Parse(json);
             if (doc.RootElement.TryGetProperty("coberturas", out var lista) && lista.ValueKind == JsonValueKind.Array)
             {
-                foreach (var c in lista.EnumerateArray())
-                {
-                    if (c.TryGetProperty("codigo", out var codigo) && codigo.ValueKind == JsonValueKind.String)
-                    {
-                        contratadas.Add(codigo.GetString()!);
-                    }
-                }
+                contratadas.UnionWith(lista.EnumerateArray()
+                    .Select(c => c.TryGetProperty("codigo", out var codigo) ? codigo : default)
+                    .Where(codigo => codigo.ValueKind == JsonValueKind.String)
+                    .Select(codigo => codigo.GetString()!));
             }
         }
         catch (JsonException)
