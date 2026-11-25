@@ -77,7 +77,9 @@ public static class Program
             cache = Path.Join(eval, "corridas", nombre + "-casos.jsonl");
         }
 
-        var evaluador = new Evaluador(eval, opciones, cache: cache);
+        // --solo-cache: el informe con los casos ya guardados (parcial si faltan), sin llamar al modelo.
+        var soloCache = a.GetValueOrDefault("solo-cache") == "si";
+        var evaluador = new Evaluador(eval, opciones, cache: cache, soloCache: soloCache);
         Informe informe;
         try
         {
@@ -101,14 +103,24 @@ public static class Program
                           $"{opciones.TokensPorMinuto} TPM · reintentos con retry-after (tope 90 s)",
                 Costo = Costo(informe, Decimal(a, "usd-entrada"), Decimal(a, "usd-cache") ?? Decimal(a, "usd-entrada"),
                     Decimal(a, "usd-salida")),
-                SegundosDeEsperaPorRitmo = Math.Round(evaluador.SegundosDeEspera, 1),
+                SegundosDeEsperaPorRitmo = soloCache ? null : Math.Round(evaluador.SegundosDeEspera, 1),
+                Parcial = informe.Corridas.Any(x => x.Metricas.Casos < (Entero(a, "casos") ?? Conjunto.Casos(eval).Count)),
             };
         }
 
         Directory.CreateDirectory(salida);
         var lineaBase = proveedor == "extractivo" ? null : LeerInforme(Path.Join(eval, "informe", "extractivo.json"));
-        await File.WriteAllTextAsync(Path.Join(salida, nombre + ".json"), JsonSerializer.Serialize(informe, Json) + "\n");
-        await File.WriteAllTextAsync(Path.Join(salida, nombre + ".md"), Markdown(informe, lineaBase));
+        var json = JsonSerializer.Serialize(informe, Json) + "\n";
+        var markdown = Markdown(informe, lineaBase, Conjunto.Casos(eval));
+        // Guarda: nada se escribe si contuviera la llave (no debería poder: el informe no la recibe nunca).
+        if (opciones.Llave is { } llave && (llave.ApareceEn(json) || llave.ApareceEn(markdown)))
+        {
+            await errores.WriteLineAsync("el informe contendría la llave: no se escribe");
+            return 4;
+        }
+
+        await File.WriteAllTextAsync(Path.Join(salida, nombre + ".json"), json);
+        await File.WriteAllTextAsync(Path.Join(salida, nombre + ".md"), markdown);
         await consola.WriteLineAsync(Resumen(informe));
 
         if (a.TryGetValue("compuerta", out var umbrales))
@@ -193,7 +205,7 @@ public static class Program
     /// El informe en Markdown: resumen por contexto, la comparación contra la línea base si se da, el uso (llamadas,
     /// tokens, costo y latencia del modelo) y el detalle del contexto normal.
     /// </summary>
-    public static string Markdown(Informe informe, Informe? lineaBase = null)
+    public static string Markdown(Informe informe, Informe? lineaBase = null, IReadOnlyList<CasoDeEvaluacion>? casos = null)
     {
         var sb = new StringBuilder();
         var inv = CultureInfo.InvariantCulture;
@@ -202,10 +214,20 @@ public static class Program
         sb.AppendLine(inv, $"Conjunto `eval/siniestros.jsonl` (huella `{informe.HuellaDelConjunto}`), " +
                            $"{informe.Corridas[0].Metricas.Casos} casos. Generado por `perito-eval`; no se edita a mano.");
         sb.AppendLine();
+        if (informe.Parcial == true)
+        {
+            sb.AppendLine("> **PARCIAL.** No todos los contextos completaron los casos; cada columna dice su N y la " +
+                          "comparación usa la línea base sobre los MISMOS casos.").AppendLine();
+        }
+
         if (informe.Fecha is not null)
         {
             sb.AppendLine(inv, $"- Corrida: {informe.Fecha} · {informe.Ajustes}");
-            sb.AppendLine(inv, $"- Espera por el ritmo (sin ráfagas): {informe.SegundosDeEsperaPorRitmo:0} s");
+            if (informe.SegundosDeEsperaPorRitmo is { } espera)
+            {
+                sb.AppendLine(inv, $"- Espera por el ritmo (sin ráfagas): {espera:0} s");
+            }
+
             sb.AppendLine("- Mismo RAG, mismo prompt, misma función de la póliza y mismas validaciones que la línea base; " +
                           "sólo cambia el servicio de chat.");
             sb.AppendLine();
@@ -220,6 +242,7 @@ public static class Program
         sb.AppendLine().Append("|---|").AppendLine(string.Concat(informe.Corridas.Select(_ => "---:|")));
         (string, Func<Metricas, string>)[] filas =
         [
+            ("Casos (N)", m => m.Casos.ToString(inv)),
             ("Clasificación (tipo exacto)", m => m.Clasificacion.ToString("0.00", inv)),
             ("Cita correcta (cláusula exacta)", m => m.Cita.ToString("0.00", inv)),
             ("Cobertura correcta", m => m.Cobertura.ToString("0.00", inv)),
@@ -267,7 +290,12 @@ public static class Program
 
         if (lineaBase is not null)
         {
-            Comparacion(sb, informe, lineaBase);
+            Comparacion(sb, informe, lineaBase, casos);
+        }
+
+        if (informe.Proveedor != "extractivo" && casos is not null)
+        {
+            Fallos(sb, informe, casos);
         }
 
         var normal = informe.Corridas.FirstOrDefault(c => c.Contexto == Contexto.Normal);
@@ -288,7 +316,7 @@ public static class Program
         return sb.ToString();
     }
 
-    private static void Comparacion(StringBuilder sb, Informe llm, Informe lineaBase)
+    private static void Comparacion(StringBuilder sb, Informe llm, Informe lineaBase, IReadOnlyList<CasoDeEvaluacion>? casos)
     {
         var inv = CultureInfo.InvariantCulture;
         sb.AppendLine().AppendLine(inv, $"## {llm.Modelo} contra la línea base determinista ({lineaBase.Modelo})")
@@ -305,6 +333,7 @@ public static class Program
         sb.AppendLine().Append("|---|").AppendLine(string.Concat(contextos.Select(_ => "---:|---:|")));
         (string, Func<Metricas, double>)[] filas =
         [
+            ("Casos (N)", m => m.Casos),
             ("Clasificación", m => m.Clasificacion), ("Cita", m => m.Cita), ("Datos faltantes F1", m => m.DatosF1),
             ("Exclusiones: exhaustividad", m => m.ExclusionesRecall), ("Exclusiones: precisión", m => m.ExclusionesPrecision),
             ("Señales: exhaustividad", m => m.SenalesRecall), ("Respuestas JSON legibles", m => m.RespuestasLegibles),
@@ -315,12 +344,56 @@ public static class Program
             sb.Append(inv, $"| {nombre} |");
             foreach (var c in contextos)
             {
-                var a = llm.Corridas.Single(x => x.Contexto == c).Metricas;
-                var b = lineaBase.Corridas.SingleOrDefault(x => x.Contexto == c)?.Metricas;
-                sb.Append(inv, $" {valor(a):0.00} | {(b is null ? "—" : valor(b).ToString("0.00", inv))} |");
+                var corrida = llm.Corridas.Single(x => x.Contexto == c);
+                var a = corrida.Metricas;
+                var baseCompleta = lineaBase.Corridas.SingleOrDefault(x => x.Contexto == c);
+                // La línea base sobre los MISMOS casos que alcanzó el LLM (un informe parcial no se compara con 50).
+                var b = baseCompleta is null || casos is null
+                    ? baseCompleta?.Metricas
+                    : Evaluador.MedirSubconjunto(casos.Where(k => corrida.Casos.Any(r => r.Id == k.Id)).ToList(),
+                        baseCompleta.Casos);
+                var entero = nombre is "Casos (N)" or "Datos personales en los prompts";
+                sb.Append(inv, $" {Celda(valor(a), entero)} | {(b is null ? "—" : Celda(valor(b), entero))} |");
             }
 
             sb.AppendLine();
+        }
+    }
+
+    private static string Celda(double v, bool entero) =>
+        v.ToString(entero ? "0" : "0.00", CultureInfo.InvariantCulture);
+
+    /// <summary>Fallos del LLM en el contexto normal, por tipo, con hasta 5 ejemplos cada uno (sólo datos del corpus
+    /// ficticio: id, esperado, propuesto y observaciones).</summary>
+    private static void Fallos(StringBuilder sb, Informe informe, IReadOnlyList<CasoDeEvaluacion> casos)
+    {
+        var inv = CultureInfo.InvariantCulture;
+        var normal = informe.Corridas.FirstOrDefault(c => c.Contexto == Contexto.Normal);
+        if (normal is null || normal.Casos.Count == 0)
+        {
+            return;
+        }
+
+        var esperado = casos.ToDictionary(c => c.Id, StringComparer.Ordinal);
+        var tipo = normal.Casos.Where(r => !r.TipoCorrecto).ToList();
+        var cita = normal.Casos.Where(r => r.TipoCorrecto && !r.CitaCorrecta).ToList();
+        var datos = normal.Casos.Where(r => r.TipoCorrecto && !r.DatosExactos).ToList();
+        sb.AppendLine().AppendLine("## Fallos del LLM por tipo (contexto normal)").AppendLine();
+        sb.AppendLine(inv, $"- Clasificación (tipo distinto): {tipo.Count} de {normal.Casos.Count}");
+        sb.AppendLine(inv, $"- Cita (tipo correcto, cláusula distinta o descartada): {cita.Count}");
+        sb.AppendLine(inv, $"- Datos faltantes (tipo correcto, conjunto distinto): {datos.Count}").AppendLine();
+        sb.AppendLine("| Tipo de fallo | Caso | Esperado | Propuesto | Datos faltantes esperados → propuestos | Observaciones |");
+        sb.AppendLine("|---|---|---|---|---|---|");
+        foreach (var (clase, lista) in new[] { ("clasificación", tipo), ("cita", cita), ("datos faltantes", datos) })
+        {
+            foreach (var r in lista.Take(5))
+            {
+                var e = esperado[r.Id].Esperado;
+                sb.AppendLine(inv,
+                    $"| {clase} | {r.Id} | {r.Esperado} | {r.Tipo ?? "—"} {r.Clausula ?? "—"} | " +
+                    $"{string.Join(", ", e.DatosFaltantes)} → {string.Join(", ", r.DatosFaltantes)} | " +
+                    $"{string.Join("; ", r.Observaciones).Replace("|", "/")} |");
+            }
         }
     }
 }

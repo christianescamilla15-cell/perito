@@ -11,6 +11,7 @@ folios son ficticios (los correos usan los dominios reservados `example.*`).
 - `informe/`: el resultado versionado de cada corrida (`perito-eval`). `extractivo.*` es la línea base determinista y
   la compuerta del CI; `groq.*` es la corrida con un LLM real (fecha, modelo, tokens, costo, latencia y la comparación
   contra la línea base), que nunca corre en el CI ni es compuerta.
+- `analisis-groq.md`: análisis escrito de los fallos del LLM real frente a la línea base, por tipo y con ejemplos.
 - `corridas/` (fuera de Git): salidas locales y la caché de casos que permite reanudar una corrida cortada por un límite.
 
 ## Cómo se etiquetó

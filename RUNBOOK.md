@@ -58,6 +58,9 @@ Escribe `eval/informe/groq.{json,md}` con la comparación contra la línea base.
 solicitudes y 7,000 tokens por minuto por omisión: `--rpm`, `--tpm`); cada caso terminado queda en
 `eval/corridas/groq-casos.jsonl`. Si Groq corta por límite diario («corrida interrumpida … HTTP 429»), se vuelve a
 correr el mismo comando cuando se restablezca y sólo hace lo que faltó. Para empezar de cero, borre ese archivo.
+Para armar el informe con lo que haya en la caché (parcial, con su N), sin llamar al modelo: el mismo comando con
+`--solo-cache si`. Medido el 2026-11-25: los tres contextos piden ~190 mil tokens contados, casi todo el límite
+diario de la capa gratuita.
 
 Si cambia una regla, el prompt o el corpus, el informe versionado cambia: se revisa el diff de cifras y se versiona
 en el mismo commit (el CI exige que coincidan).

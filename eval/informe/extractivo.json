@@ -4307,5 +4307,6 @@
   "fecha": null,
   "ajustes": null,
   "costo": null,
-  "segundos_de_espera_por_ritmo": null
+  "segundos_de_espera_por_ritmo": null,
+  "parcial": null
 }
