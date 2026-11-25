@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Dominio: SÓLO la biblioteca base (BCL). Sin paquetes y sin referencias a otros proyectos. -->
+  <PropertyGroup>
+    <RootNamespace>Perito.Domain</RootNamespace>
+  </PropertyGroup>
+</Project>

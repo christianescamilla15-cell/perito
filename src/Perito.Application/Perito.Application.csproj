@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Casos de uso, puertos y el mediador propio. Depende sólo del dominio. -->
+  <PropertyGroup>
+    <RootNamespace>Perito.Application</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Domain\Perito.Domain.csproj" />
+  </ItemGroup>
+</Project>

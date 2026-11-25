@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Adaptadores en memoria de los puertos de Application: la evaluación y las pruebas de casos de uso. -->
+  <PropertyGroup>
+    <RootNamespace>Perito.EnMemoria</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Application\Perito.Application.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+</Project>
