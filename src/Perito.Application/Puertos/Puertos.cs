@@ -152,3 +152,19 @@ public interface ITableroDeReservas
     /// <summary>Saldos por ramo.</summary>
     Task<IReadOnlyList<SaldoDeReservaPorRamo>> LeerAsync(CancellationToken ct);
 }
+
+/// <summary>
+/// Un consumidor de eventos de la bandeja de salida. La entrega es «al menos una vez»: el consumidor DEBE ser
+/// idempotente por el id del mensaje (la infraestructura lo hace con una bandeja de entrada).
+/// </summary>
+public interface IConsumidorDeEventos
+{
+    /// <summary>Nombre estable (llave de su bandeja de entrada).</summary>
+    string Nombre { get; }
+
+    /// <summary>Si le interesa el evento.</summary>
+    bool Atiende(Domain.Comun.IEventoDeDominio evento);
+
+    /// <summary>Aplica el evento; recibir dos veces el mismo mensaje no cambia el resultado.</summary>
+    Task ConsumirAsync(Guid mensajeId, Domain.Comun.IEventoDeDominio evento, CancellationToken ct);
+}

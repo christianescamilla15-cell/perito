@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Adaptadores: PostgreSQL (EF Core + Npgsql, migraciones), bandeja de salida y de entrada, proyección de reservas,
+       cifrado de campos, registro de accesos y reloj del sistema. -->
+  <PropertyGroup>
+    <RootNamespace>Perito.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Application\Perito.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
