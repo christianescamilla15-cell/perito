@@ -43,7 +43,9 @@ DEPENDENCIAS = re.compile(
     r'(^|/)(requirements[^/]*\.(txt|in)|constraints[^/]*\.txt|pyproject\.toml'
     r'|poetry\.lock|uv\.lock|Pipfile(\.lock)?'
     r'|package\.json|package-lock\.json|npm-shrinkwrap\.json|pnpm-lock\.yaml|yarn\.lock'
-    r'|Dockerfile[^/]*|docker-compose[^/]*\.ya?ml|go\.(mod|sum)|Cargo\.(toml|lock)|[^/]+\.csproj)$'
+    r'|Dockerfile[^/]*|docker-compose[^/]*\.ya?ml|go\.(mod|sum)|Cargo\.(toml|lock)|[^/]+\.csproj'
+    r'|Directory\.(Packages|Build)\.props|packages\.lock\.json|dotnet-tools\.json|global\.json'
+    r'|[Nn]u[Gg]et\.config)$'
     r'|^\.github/workflows/[^/]+\.ya?ml$')
 
 

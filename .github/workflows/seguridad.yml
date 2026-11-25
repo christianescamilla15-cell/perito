@@ -1,0 +1,186 @@
+# Seguridad (N04, N05, N06, N12): cada paso debe probar que analizó algo, no sólo que terminó.
+# Plantilla común del portafolio, adaptada a .NET 10 (C# compilado para CodeQL) + Python (herramientas).
+# Acciones ancladas por SHA (el tag va en el comentario; Dependabot las actualiza).
+name: seguridad
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 6 * * 1'   # lunes: también se revisa lo que no cambió (CVE nuevas)
+
+permissions:
+  contents: read
+
+jobs:
+  confidencialidad:
+    name: confidencialidad (sin datos de clientes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      # La lista de términos vive en el secreto del repo, nunca en el código; el reporte no imprime términos.
+      - name: términos vetados en todo el árbol
+        if: github.event.pull_request.user.login != 'dependabot[bot]'
+        run: python herramientas/confidencialidad.py
+        env:
+          CONFIDENCIAL_TERMINOS: ${{ secrets.CONFIDENCIAL_TERMINOS }}
+      # Dependabot no recibe los secretos de Actions (ni debe: el paquete nuevo corre al instalarse). Su PR sólo
+      # puede tocar manifiestos, candados y versiones; lo demás falla. Al fusionar, el push a main mide todo el árbol.
+      - name: PR de Dependabot (sólo manifiestos y candados)
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        # La rama base entra por env, no interpolada en el script (Semgrep: run-shell-injection).
+        env:
+          RAMA_BASE: ${{ github.base_ref }}
+        run: python herramientas/confidencialidad.py --solo-dependencias "origin/$RAMA_BASE"
+
+  secretos:
+    name: secretos (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0        # toda la historia: un secreto borrado sigue en Git
+      # Imagen oficial con versión fija (la misma que .pre-commit-config.yaml). Se corre con el usuario del
+      # runner para que git no rechace el árbol montado por «dubious ownership».
+      - name: gitleaks sobre toda la historia
+        shell: bash             # bash con pipefail: el código de salida de gitleaks sobrevive al tee
+        run: >-
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/repo"
+          ghcr.io/gitleaks/gitleaks:v8.21.2 git /repo --redact --verbose --exit-code 1
+          2>&1 | tee gitleaks.log
+      # La acción oficial termina en verde aunque no haya escaneado un solo commit: se exige verlo en el log.
+      - name: probar que escaneó commits
+        if: always()
+        run: grep -Eq '[1-9][0-9]* commits scanned' gitleaks.log
+
+  codeql:
+    name: SAST (CodeQL)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        lenguaje: [python]   # las herramientas; C# va en su propio job, compilado
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: github/codeql-action/init@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          languages: ${{ matrix.lenguaje }}
+          queries: security-and-quality
+          build-mode: none     # Python nunca se compila
+      - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+
+  # C# COMPILADO (build-mode manual): sin compilar, CodeQL adivina tipos y dependencias y pierde flujos que pasan
+  # por los paquetes; compilando ve el mismo programa que corre.
+  codeql-csharp:
+    name: SAST (CodeQL C#, compilado)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: '10.0.x'
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+      - uses: github/codeql-action/init@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          languages: csharp
+          queries: security-and-quality
+          build-mode: manual
+      - run: dotnet restore Perito.slnx --locked-mode
+      # sin compilación compartida: el rastreador de CodeQL debe ver cada invocación del compilador
+      - run: dotnet build Perito.slnx -c Release --no-restore --no-incremental -p:UseSharedCompilation=false
+      - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          category: /language:csharp
+
+  semgrep:
+    name: SAST (Semgrep, bloqueante)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    container:
+      # Versión fija (la misma probada en local); el digest evita que una etiqueta reescrita cambie la imagen.
+      image: semgrep/semgrep:1.186.0@sha256:6e1b04340e60e910fbb4ddbf3c857ab0918f064417ad5ac530014ccb3cf8c8f1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: >-
+          semgrep scan --config p/default --error
+          --sarif -o semgrep.sarif --json-output=semgrep.json
+      - name: probar que analizó archivos
+        if: always()
+        run: python3 herramientas/verificar_reportes.py semgrep semgrep.json
+      # lo suprimido en el código (nosemgrep con su motivo) no se sube: GitHub lo contaría como alerta abierta
+      - name: depurar SARIF
+        if: always()
+        run: python3 herramientas/verificar_reportes.py depurar-sarif semgrep.sarif
+      - uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        if: always()
+        with:
+          sarif_file: semgrep.sarif
+          category: semgrep
+
+  dependencias:
+    name: dependencias e IaC (Trivy, bloqueante en CRITICAL/HIGH con arreglo)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: inventario (prueba de que hay qué analizar)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          format: json
+          output: trivy.json
+          list-all-pkgs: 'true'
+          exit-code: '0'
+      - run: python3 herramientas/verificar_reportes.py trivy trivy.json
+      - name: vulnerabilidades (bloqueante)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          severity: CRITICAL,HIGH
+          ignore-unfixed: 'true'
+          trivyignores: .trivyignore     # cada excepción con fecha de vencimiento y motivo
+          exit-code: '1'
+          format: sarif
+          output: trivy.sarif
+          # Sin esto, con format=sarif la acción descarta `severity` y bloquea con cualquier severidad.
+          limit-severities-for-sarif: 'true'
+      - uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        if: always()
+        with:
+          sarif_file: trivy.sarif
+          category: trivy
+      - name: configuración e IaC
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: config
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+
+  sbom:
+    name: SBOM (syft)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
+        with:
+          format: spdx-json
+          output-file: sbom.spdx.json
+      - run: python3 herramientas/verificar_reportes.py sbom sbom.spdx.json

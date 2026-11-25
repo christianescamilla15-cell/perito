@@ -1,0 +1,107 @@
+# CI de Perito: compilación con advertencias como errores y candados de NuGet bloqueados; pruebas por capa (dominio,
+# casos de uso, asistente y arquitectura); la compuerta de la evaluación del asistente con su control negativo; e
+# integración contra PostgreSQL real (Testcontainers) para la infraestructura y la API.
+# Un job «skipped» por depender de otro en rojo NO es verde: en la rama protegida todos son requeridos.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+
+jobs:
+  pruebas:
+    name: compilación y pruebas (dominio, aplicación, asistente, arquitectura)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: '10.0.x'
+          cache: true             # caché de NuGet con llave del hash de los packages.lock.json
+          cache-dependency-path: '**/packages.lock.json'
+      # Candados de NuGet en modo bloqueado: lo que compila el CI es exactamente lo versionado.
+      - run: dotnet restore Perito.slnx --locked-mode
+      # Las advertencias son errores (Directory.Build.props).
+      - run: dotnet build Perito.slnx -c Release --no-restore
+      - name: pruebas por capa (con cobertura) y de arquitectura (sin cobertura)
+        run: |
+          for p in Domain Application Asistente; do
+            dotnet test "tests/Perito.$p.Tests" -c Release --no-build --results-directory resultados \
+              --logger "trx;LogFileName=$p.trx" --collect "XPlat Code Coverage"
+          done
+          # Arquitectura SIN cobertura: lee el IL y coverlet lo instrumentaría.
+          dotnet test tests/Perito.Architecture.Tests -c Release --no-build --results-directory resultados \
+            --logger "trx;LogFileName=Architecture.trx"
+      - name: probar que corrieron pruebas en cada proyecto
+        run: >-
+          python3 herramientas_ci/contar_trx.py resultados/Domain.trx resultados/Application.trx
+          resultados/Asistente.trx resultados/Architecture.trx
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: pruebas
+          path: resultados/
+
+  evaluacion:
+    name: evaluación del asistente (compuerta con el modelo extractivo y control negativo)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: '10.0.x'
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+      - run: dotnet restore Perito.slnx --locked-mode
+      - run: dotnet build src/Perito.Evaluacion -c Release --no-restore
+      # Los 50 casos en tres contextos (normal, vacío y barajado) y los umbrales de eval/umbrales.json.
+      - name: compuerta
+        run: >-
+          dotnet src/Perito.Evaluacion/bin/Release/net10.0/perito-eval.dll
+          --salida eval/corridas --compuerta eval/umbrales.json
+      # El informe versionado (el que cita el README) debe ser exactamente el que produce este commit.
+      - name: el informe versionado es el de este commit
+        run: diff -u eval/informe/extractivo.json eval/corridas/extractivo.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: evaluacion
+          path: eval/corridas/
+
+  integracion:
+    name: integración con PostgreSQL real (infraestructura y API por Testcontainers)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: '10.0.x'
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+      - run: dotnet restore Perito.slnx --locked-mode
+      - run: dotnet build Perito.slnx -c Release --no-restore
+      # Cada proyecto levanta su PostgreSQL 16 (imagen fija por digest, tope de 512 MB) y una base por prueba.
+      - name: infraestructura (EF Core, bandeja de salida, cifrado) y API (WebApplicationFactory)
+        run: |
+          for p in Infrastructure Api; do
+            dotnet test "tests/Perito.$p.Tests" -c Release --no-build --results-directory resultados \
+              --logger "trx;LogFileName=$p.trx" --collect "XPlat Code Coverage"
+          done
+      - name: probar que corrieron pruebas en cada proyecto
+        run: python3 herramientas_ci/contar_trx.py resultados/Infrastructure.trx resultados/Api.trx
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: integracion
+          path: resultados/

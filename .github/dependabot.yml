@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: /
+    schedule: { interval: weekly }
+    cooldown: { default-days: 7 }   # no proponer versiones con menos de una semana publicadas
+    groups:                       # menores y parches juntos: un PR por semana; las mayores van solas
+      nuget-menores:
+        update-types: [minor, patch]
+    open-pull-requests-limit: 5
+  - package-ecosystem: dotnet-sdk
+    directory: /
+    schedule: { interval: weekly }
+    cooldown: { default-days: 7 }   # no proponer versiones con menos de una semana publicadas
+    ignore:
+      - dependency-name: '*'
+        update-types: [version-update:semver-major]   # .NET 10 (LTS): el salto de mayor se decide en un ADR
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    cooldown: { default-days: 7 }   # no proponer versiones con menos de una semana publicadas
+    groups:                       # menores y parches juntos: un PR por semana; las mayores van solas
+      acciones-menores:
+        update-types: [minor, patch]
