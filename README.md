@@ -14,18 +14,18 @@ Etapa 1 de 4 ([`docs/PLAN.md`](docs/PLAN.md)).
 
 | Afirmación | Evidencia |
 |---|---|
-| Cada regla del dominio tiene su prueba | 43 reglas en [`docs/reglas.md`](docs/reglas.md), cada una con la prueba que la nombra; los 6 ejemplos de cálculo de la cláusula GEN-7 se leen del documento y son el oráculo |
+| Cada regla del dominio tiene su prueba | 43 reglas en [`docs/reglas.md`](docs/reglas.md), cada una con `archivo::prueba` (una prueba verifica que existan y no estén apagadas); los 6 ejemplos de cálculo de la cláusula GEN-7 se leen del documento y son el oráculo |
 | La máquina de estados no admite atajos | las 47 combinaciones estado × acción no permitidas fallan con `transicion_invalida` sin cambiar estado ni eventos |
 | El asistente propone y no decide | 6 propuestas hostiles no cambian el siniestro (en memoria y en PostgreSQL: `xmin` y bandeja intactos); aceptar una propuesta falsa termina en el dictamen de las reglas; en el IL el asistente no crea comandos ni cambia agregados (inyectar uno hace fallar la prueba) |
 | Eventos sin pérdida ni duplicados | estado y evento en la misma transacción; un mensaje entregado dos veces se aplica una vez; dos despachadores concurrentes no duplican y la proyección cuadra con Σ de reservas vigentes; reintentos hasta mensaje muerto |
 | Sin datos personales donde no deben estar | sin texto claro en la base (AES-256-GCM); cero datos personales conocidos en los prompts de 50 casos × 3 contextos; anonimizar no deja rastro en ninguna tabla; los eventos no tienen campos de texto libre |
 | El RAG importa (control negativo) | con contexto vacío la cita cae de 0.86 a 0.00 y con contexto barajado a 0.34 |
 
-**266 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
+**269 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
 
 | Proyecto | Pruebas | Qué cubre |
 |---|---:|---|
-| `Perito.Domain.Tests` | 149 | reglas, matriz de transiciones, catálogo contra las condiciones, privacidad y seudonimizador |
+| `Perito.Domain.Tests` | 152 | reglas, matriz de transiciones, catálogo contra las condiciones, la tabla de reglas contra las pruebas, privacidad y seudonimizador |
 | `Perito.Application.Tests` | 32 | casos de uso con almacén en memoria (copias por sesión), propone y no decide, validador de propuestas, finalidad y anonimización |
 | `Perito.Asistente.Tests` | 37 | corpus, BM25, prompt, lista blanca de funciones, rondas, lectura tolerante, línea base y la compuerta de la evaluación |
 | `Perito.Infrastructure.Tests` | 23 | PostgreSQL 16 real por Testcontainers: ida y vuelta, cifrado en reposo, concurrencia, bandeja de salida, idempotencia, despachadores concurrentes |

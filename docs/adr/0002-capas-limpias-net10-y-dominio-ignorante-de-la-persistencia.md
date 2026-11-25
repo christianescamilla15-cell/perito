@@ -24,5 +24,5 @@ la bandeja de salida.
 - **MediatR:** dependencia externa (y de licencia cambiante) para lo que es un diccionario de manejadores.
 
 ## Consecuencias
-- Más código de mapeo, a cambio de reglas puras: 149 pruebas de dominio corren en ~0.2 s.
+- Más código de mapeo, a cambio de reglas puras: las 152 pruebas de dominio corren en ~0.2 s.
 - El mapeo se prueba contra PostgreSQL real (ida y vuelta, lectura sin reescritura, concurrencia).
