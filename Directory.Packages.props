@@ -5,7 +5,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.15" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.15" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
     <PackageVersion Include="Microsoft.SemanticKernel.Core" Version="1.82.0" />
     <!-- Ollama: el servicio dedicado del conector alfa de SK está obsoleto y recomienda el IChatClient de OllamaSharp
          adaptado con AsChatCompletionService (docs/adr/0004). -->
