@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Perito.Api/Perito.Api.csproj" />
     <Project Path="src/Perito.Application/Perito.Application.csproj" />
     <Project Path="src/Perito.Asistente/Perito.Asistente.csproj" />
     <Project Path="src/Perito.Domain/Perito.Domain.csproj" />
@@ -8,7 +9,9 @@
     <Project Path="src/Perito.Infrastructure/Perito.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Perito.Api.Tests/Perito.Api.Tests.csproj" />
     <Project Path="tests/Perito.Application.Tests/Perito.Application.Tests.csproj" />
+    <Project Path="tests/Perito.Architecture.Tests/Perito.Architecture.Tests.csproj" />
     <Project Path="tests/Perito.Asistente.Tests/Perito.Asistente.Tests.csproj" />
     <Project Path="tests/Perito.Domain.Tests/Perito.Domain.Tests.csproj" />
     <Project Path="tests/Perito.Infrastructure.Tests/Perito.Infrastructure.Tests.csproj" />

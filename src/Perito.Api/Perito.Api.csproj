@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- API mínima REST: composición, JWT con roles, contrato de errores, finalidad de lectura y el trabajador de la
+       bandeja de salida. -->
+  <PropertyGroup>
+    <RootNamespace>Perito.Api</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Perito.Infrastructure\Perito.Infrastructure.csproj" />
+    <ProjectReference Include="..\Perito.Asistente\Perito.Asistente.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Perito.Api.Tests" />
+  </ItemGroup>
+</Project>
