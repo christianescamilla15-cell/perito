@@ -7,14 +7,16 @@
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.15" />
     <PackageVersion Include="Microsoft.SemanticKernel.Core" Version="1.82.0" />
+    <!-- Groq expone un API compatible con OpenAI: el conector OpenAI de SK con endpoint propio (docs/adr/0009). -->
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.82.0" />
     <!-- Ollama: el servicio dedicado del conector alfa de SK está obsoleto y recomienda el IChatClient de OllamaSharp
          adaptado con AsChatCompletionService (docs/adr/0004). -->
     <PackageVersion Include="OllamaSharp" Version="5.5.2" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.15" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <PackageVersion Include="coverlet.collector" Version="10.1.1" />
     <PackageVersion Include="Testcontainers.PostgreSql" Version="4.17.0" />
     <PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />
     <PackageVersion Include="Mono.Cecil" Version="0.11.6" />

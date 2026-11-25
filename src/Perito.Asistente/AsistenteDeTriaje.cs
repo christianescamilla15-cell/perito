@@ -40,14 +40,34 @@ public sealed class FuncionesDePoliza(IMediador mediador, Guid siniestroId)
 /// <summary>Opciones del asistente.</summary>
 public sealed record OpcionesDelAsistente
 {
-    /// <summary>«extractivo» (línea base determinista, la de las pruebas y el CI) u «ollama».</summary>
+    /// <summary>«extractivo» (línea base determinista, la de las pruebas y el CI), «ollama» o «groq».</summary>
     public string Proveedor { get; init; } = "extractivo";
 
-    /// <summary>Modelo de Ollama (sólo con el proveedor «ollama»).</summary>
+    /// <summary>Modelo del proveedor («ollama» o «groq»).</summary>
     public string Modelo { get; init; } = "qwen2.5:1.5b";
 
-    /// <summary>Dirección de Ollama.</summary>
+    /// <summary>Dirección del proveedor: Ollama local o el API compatible con OpenAI de Groq.</summary>
     public string Endpoint { get; init; } = "http://127.0.0.1:11434";
+
+    /// <summary>Llave del API (sólo «groq»). Nunca se imprime ni se serializa.</summary>
+    [System.Text.Json.Serialization.JsonIgnore]
+    public SecretoApi? Llave { get; init; }
+
+    /// <summary>reasoning_effort de los modelos de razonamiento de Groq (gpt-oss: low, medium o high).</summary>
+    public string EsfuerzoDeRazonamiento { get; init; } = "low";
+
+    /// <summary>Tope de tokens de salida por llamada.</summary>
+    public int TokensMaximosDeSalida { get; init; } = 2048;
+
+    /// <summary>Solicitudes por minuto que deja pasar el ritmo (capa gratuita de Groq: 30; se usa menos).</summary>
+    public int SolicitudesPorMinuto { get; init; } = 20;
+
+    /// <summary>Tokens por minuto que deja pasar el ritmo (capa gratuita de Groq: 8,000; se usa menos).</summary>
+    public int TokensPorMinuto { get; init; } = 7000;
+
+    /// <summary>Cliente HTTP propio (pruebas contra un servidor falso).</summary>
+    [System.Text.Json.Serialization.JsonIgnore]
+    public HttpClient? Transporte { get; init; }
 
     /// <summary>Rondas máximas de llamada a funciones antes de exigir la respuesta final.</summary>
     public int RondasMaximas { get; init; } = 3;

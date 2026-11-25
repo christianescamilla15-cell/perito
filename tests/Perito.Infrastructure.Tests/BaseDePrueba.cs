@@ -157,9 +157,12 @@ public sealed class Banco : IAsyncDisposable
     /// <summary>Despacha hasta vaciar la bandeja (lo listo para entregar).</summary>
     public async Task DespacharTodoAsync()
     {
-        while (await Despachador.ProcesarLoteAsync(CancellationToken.None) > 0)
+        int tomados;
+        do
         {
+            tomados = await Despachador.ProcesarLoteAsync(CancellationToken.None);
         }
+        while (tomados > 0);
     }
 
     public async Task<T?> EscalarAsync<T>(string sql, params object[] parametros)

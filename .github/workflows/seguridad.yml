@@ -105,6 +105,15 @@ jobs:
       - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
         with:
           category: /language:csharp
+          upload: never
+          output: sarif-csharp
+      # El código que genera el compilador (expresiones regulares en obj/) no es de este repo: se quita antes de subir.
+      - name: quitar del SARIF el código generado por el compilador
+        run: python3 herramientas_ci/filtrar_sarif.py sarif-csharp/csharp.sarif /obj/
+      - uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          sarif_file: sarif-csharp/csharp.sarif
+          category: /language:csharp
 
   semgrep:
     name: SAST (Semgrep, bloqueante)

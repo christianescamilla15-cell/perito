@@ -20,8 +20,14 @@ Conjunto `eval/siniestros.jsonl` (huella `cd2b370fe53b2960`), 50 casos. Generado
 | Respuestas JSON legibles | 1.00 | 1.00 | 1.00 |
 | Llamó a la función de la póliza | 1.00 | 1.00 | 1.00 |
 | Datos personales en los prompts | 0 | 0 | 0 |
-| Latencia media (ms) | no aplica | no aplica | no aplica |
-| Latencia p95 (ms) | no aplica | no aplica | no aplica |
+| Latencia media por propuesta (ms, con la espera del ritmo) | no aplica | no aplica | no aplica |
+| Latencia p95 por propuesta (ms) | no aplica | no aplica | no aplica |
+| Llamadas al modelo | 100 | 100 | 100 |
+| Tokens de entrada | no aplica | no aplica | no aplica |
+| Tokens de entrada servidos de la caché de prompts | no aplica | no aplica | no aplica |
+| Tokens de salida (incluye razonamiento) | no aplica | no aplica | no aplica |
+| Latencia media por llamada al modelo (ms) | no aplica | no aplica | no aplica |
+| Latencia p95 por llamada al modelo (ms) | no aplica | no aplica | no aplica |
 
 ## Detalle (contexto normal)
 

@@ -8,7 +8,10 @@ folios son ficticios (los correos usan los dominios reservados `example.*`).
   exige que ninguno llegue a un prompt.
 - `polizas.json`: las cuatro carátulas que usan los casos (auto amplia y limitada, hogar completa y básica).
 - `umbrales.json`: la compuerta del CI (modelo extractivo) y lo que debe caer con el control negativo.
-- `informe/`: el resultado versionado de cada corrida (`perito-eval`).
+- `informe/`: el resultado versionado de cada corrida (`perito-eval`). `extractivo.*` es la línea base determinista y
+  la compuerta del CI; `groq.*` es la corrida con un LLM real (fecha, modelo, tokens, costo, latencia y la comparación
+  contra la línea base), que nunca corre en el CI ni es compuerta.
+- `corridas/` (fuera de Git): salidas locales y la caché de casos que permite reanudar una corrida cortada por un límite.
 
 ## Cómo se etiquetó
 

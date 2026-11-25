@@ -80,11 +80,12 @@ public sealed class Api : IAsyncDisposable
         Converters = { new JsonStringEnumConverter() },
     };
 
+    private readonly WebApplicationFactory<Program> _base = new();
     private readonly WebApplicationFactory<Program> _fabrica;
 
     public Api(IReadOnlyDictionary<string, string?> ajustes)
     {
-        _fabrica = new WebApplicationFactory<Program>().WithWebHostBuilder(b =>
+        _fabrica = _base.WithWebHostBuilder(b =>
         {
             b.UseEnvironment("Pruebas");
             foreach (var (llave, valor) in ajustes)
@@ -160,5 +161,9 @@ public sealed class Api : IAsyncDisposable
         return (titular, folio, siniestro);
     }
 
-    public ValueTask DisposeAsync() => _fabrica.DisposeAsync();
+    public async ValueTask DisposeAsync()
+    {
+        await _fabrica.DisposeAsync();
+        await _base.DisposeAsync();
+    }
 }
