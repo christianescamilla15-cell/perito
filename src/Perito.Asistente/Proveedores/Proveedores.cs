@@ -98,6 +98,17 @@ public static class Ejecucion
         };
     }
 
+    /// <summary>
+    /// Los ajustes de la respuesta final, con el resultado de la función ya entregado: las funciones siguen declaradas
+    /// pero no se pueden llamar (tool_choice «none»).
+    /// </summary>
+    public static PromptExecutionSettings AjustesFinales(OpcionesDelAsistente opciones)
+    {
+        var ajustes = Ajustes(opciones);
+        ajustes.FunctionChoiceBehavior = FunctionChoiceBehavior.None();
+        return ajustes;
+    }
+
     /// <summary>Nombre del modelo que queda en la propuesta.</summary>
     public static string NombreDelModelo(OpcionesDelAsistente opciones) =>
         opciones.Proveedor == "extractivo" ? ModeloExtractivo.Nombre : opciones.Modelo;

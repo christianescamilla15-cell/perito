@@ -97,7 +97,8 @@ internal sealed class OpenAIFalso(Func<string, string>? nombreDevuelto = null) :
 /// </summary>
 public class GroqProtocoloTests
 {
-    internal const string LlaveFalsa = "gsk_PRUEBA_esto_no_es_una_llave_real_0123456789";
+    // Sin el prefijo de las llaves reales: así una búsqueda de ese prefijo en el árbol sólo encuentra fugas de verdad.
+    internal const string LlaveFalsa = "llave-de-prueba-que-no-es-real-0123456789";
 
     internal static OpcionesDelAsistente Opciones(HttpMessageHandler servidor) => new()
     {
@@ -150,6 +151,10 @@ public class GroqProtocoloTests
         Assert.All(servidor.Autorizaciones, a => Assert.Equal("Bearer " + LlaveFalsa, a));
         var resultado = servidor.Solicitudes[1]["messages"]!.AsArray().Single(m => (string?)m!["role"] == "tool");
         Assert.Equal("call_1", (string?)resultado!["tool_call_id"]);
+        // Regresión (corrida real del 2026-11-25): con herramientas habilitadas en la respuesta final, gpt-oss «llamaba»
+        // a una herramienta «json» y Groq devolvía 400 tool_use_failed. La ronda final va con tool_choice «none».
+        Assert.Equal("auto", (string?)primera["tool_choice"]);
+        Assert.Equal("none", (string?)servidor.Solicitudes[1]["tool_choice"]);
         Assert.Contains("DanosMateriales", (string?)resultado["content"], StringComparison.Ordinal);
         foreach (var personal in new[] { "Lucía", "Ferrer", "Olivo 24", "AFV-AUT-000088" })
         {

@@ -51,6 +51,9 @@ public sealed class SecretoApi
     /// <summary>El valor, sólo para el encabezado de autorización.</summary>
     internal string Revelar() => _valor;
 
+    /// <summary>Si el texto contiene la llave (guarda antes de escribir cualquier salida), sin revelarla.</summary>
+    public bool ApareceEn(string texto) => texto.Contains(_valor, StringComparison.Ordinal);
+
     /// <inheritdoc />
     public override string ToString() => "[secreto]";
 }

@@ -19,15 +19,15 @@ Etapa 1 de 4 ([`docs/PLAN.md`](docs/PLAN.md)).
 | El asistente propone y no decide | 6 propuestas hostiles no cambian el siniestro (en memoria y en PostgreSQL: `xmin` y bandeja intactos); aceptar una propuesta falsa termina en el dictamen de las reglas; en el IL el asistente no crea comandos ni cambia agregados (inyectar uno hace fallar la prueba) |
 | Eventos sin pérdida ni duplicados | estado y evento en la misma transacción; un mensaje entregado dos veces se aplica una vez; dos despachadores concurrentes no duplican y la proyección cuadra con Σ de reservas vigentes; reintentos hasta mensaje muerto |
 | Sin datos personales donde no deben estar | sin texto claro en la base (AES-256-GCM); cero datos personales conocidos en los prompts de 50 casos × 3 contextos; anonimizar no deja rastro en ninguna tabla; los eventos no tienen campos de texto libre |
-| El RAG importa (control negativo) | con contexto vacío la cita cae de 0.86 a 0.00 y con contexto barajado a 0.34 |
+| El RAG importa (control negativo) | línea base: con contexto vacío la cita cae de 0.86 a 0.00 y con contexto barajado a 0.34; LLM real (Groq): de 0.90 a 0.00 y a 0.42 |
 
-**288 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
+**290 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
 
 | Proyecto | Pruebas | Qué cubre |
 |---|---:|---|
 | `Perito.Domain.Tests` | 152 | reglas, matriz de transiciones, catálogo contra las condiciones, la tabla de reglas contra las pruebas, privacidad y seudonimizador |
 | `Perito.Application.Tests` | 32 | casos de uso con almacén en memoria (copias por sesión), propone y no decide, validador de propuestas, finalidad y anonimización |
-| `Perito.Asistente.Tests` | 56 | corpus, BM25, prompt, lista blanca de funciones, rondas, lectura tolerante, línea base, Groq y Ollama contra su protocolo HTTP (nombres de función, 429, ritmo), la llave que nunca sale y la compuerta de la evaluación |
+| `Perito.Asistente.Tests` | 58 | corpus, BM25, prompt, lista blanca de funciones, rondas, lectura tolerante, línea base, Groq y Ollama contra su protocolo HTTP (nombres de función, 429, ritmo), la llave que nunca sale y la compuerta de la evaluación |
 | `Perito.Infrastructure.Tests` | 23 | PostgreSQL 16 real por Testcontainers: ida y vuelta, cifrado en reposo, concurrencia, bandeja de salida, idempotencia, despachadores concurrentes |
 | `Perito.Api.Tests` | 12 | API real sobre PostgreSQL: 401/403, flujo completo por HTTP, finalidad, contrato de errores, límite 429, trabajador → tablero, arranque sin secretos |
 | `Perito.Architecture.Tests` | 13 | capas (NetArchTest) y garantías en el IL (Mono.Cecil): asistente sin comandos, seudonimizador único, reloj único |
@@ -56,10 +56,29 @@ tubería (recuperación, función de la póliza, validación, seudonimización) 
 ### Qué mide un LLM real (Groq)
 
 <!-- GROQ:INICIO -->
-**Pendiente de la corrida.** El proveedor está probado sin red; la corrida de los 50 casos con su control negativo
-necesita la llave del dueño (`~/.config/perito/groq.env`, permisos 600) y su comando está en el
-[RUNBOOK](RUNBOOK.md#evaluación-del-asistente). No se publica ninguna cifra de un LLM sin corrida real; con Ollama
-tampoco se corrió ([ADR 0004](docs/adr/0004-asistente-semantic-kernel-propone-y-no-decide.md)).
+`openai/gpt-oss-120b` en Groq, corrida del 2026-11-25 — [informe](eval/informe/groq.md) ·
+[análisis de fallos](eval/analisis-groq.md). Mismo RAG, prompt, función y validaciones que la línea base; sólo cambia
+el servicio de chat. **PARCIAL:** el límite diario de tokens de la capa gratuita (200 mil) cortó los controles: el
+contexto normal tiene los 50 casos, el vacío 40 y el barajado 38. Cada comparación usa la línea base sobre los MISMOS
+casos.
+
+| Contexto | N | Clasificación LLM / base | Cita LLM / base | Datos faltantes F1 LLM / base |
+|---|---:|---:|---:|---:|
+| Normal | 50 | 0.86 / 0.86 | 0.90 / 0.86 | 0.89 / 0.86 |
+| Vacío (control) | 40 | 0.00 / 0.00 | 0.00 / 0.00 | 0.06 / 0.00 |
+| Barajado (control) | 38 | 0.45 / 0.37 | 0.42 / 0.37 | 0.65 / 0.60 |
+
+- **Control negativo:** sin contexto la cita del LLM cae de 0.90 a 0.00 y con el contexto de otro caso a 0.42, por
+  debajo de la recuperación de ese contexto (0.45): no cita lo que no recibió.
+- **Exclusiones a verificar:** exhaustividad 0.82 contra 0.45 de la línea base (precisión 0.75 contra 1.00).
+- **Los fallos son de otra naturaleza:** la línea base confunde tipos por vocabulario; el LLM acierta esas paráfrasis
+  pero se abstiene (devuelve `null`) cuando una exclusión aplica o la cobertura no está contratada (5 casos) y escribe
+  mal un nombre de tipo (2): decide cuando sólo debía proponer, por una regla ambigua del prompt.
+- **Uso:** 256 llamadas, 268,066 tokens de entrada (110,080 servidos de la caché de prompts) y 30,808 de salida; USD
+  0.0504 a precio de lista (la capa gratuita no cobra). Latencia por llamada al modelo: 0.72 s de media y 1.24 s p95
+  en el contexto normal; por propuesta, 17 s de media por el ritmo que respeta los límites.
+- La corrida encontró y corrigió un defecto: con herramientas habilitadas en la respuesta final, gpt-oss «llamaba» a
+  una herramienta `json` y Groq devolvía 400; ahora la ronda final va con `tool_choice: none` (con prueba).
 <!-- GROQ:FIN -->
 
 El CI **nunca** llama a un LLM: los proveedores `groq` (conector OpenAI de Semantic Kernel contra el API compatible de
@@ -121,6 +140,8 @@ cumplimiento ([ADR 0006](docs/adr/0006-privacidad-por-diseno.md)).
 - **Seudonimización por patrones:** un nombre de tercero sin señal («ayer Pedro me chocó») no se detecta.
 - **Rotación de llaves sin re-cifrado en lote** y mensajes muertos sin panel (se atienden con SQL del runbook).
 - **Otros proveedores de LLM:** ni Azure OpenAI ni otro están incluidos ni probados; sólo la línea base, Ollama y Groq.
+- **Corrida con el LLM real incompleta en los controles** (vacío 40 de 50, barajado 38 de 50: límite diario de la capa
+  gratuita) y una sola corrida: no hay intervalos ni repeticiones.
 - Dominio acotado: sin pagos parciales, salvamento, subrogación ni reapertura (etapa 4).
 
 ## Licencia

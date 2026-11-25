@@ -36,3 +36,18 @@ real, sin infraestructura local pesada y dentro de una capa gratuita con límite
 - El informe `eval/informe/groq.md` lleva fecha, modelo, ajustes, métricas con su control negativo, tokens (con los
   servidos de caché), costo a precio de lista, latencia por llamada y la comparación contra la línea base. Ninguna
   cifra del LLM se publica sin una corrida real.
+
+## Resultado de la corrida del 2026-11-25 (parcial)
+- Normal con los 50 casos; el límite diario de tokens (200 mil en la capa gratuita) cortó los controles en 40 casos
+  (vacío) y 38 (barajado). Reanudar no fue posible porque la llave se revoca después de la corrida. El informe se
+  armó desde la caché de casos (`--solo-cache si`) y compara contra la línea base sobre los mismos casos.
+- Contra la línea base determinista: clasificación 0.86 / 0.86, cita 0.90 / 0.86, datos faltantes F1 0.89 / 0.86,
+  exhaustividad de exclusiones 0.82 / 0.45. Control: cita 0.00 sin contexto y 0.42 con contexto barajado.
+- Uso: 256 llamadas, 268,066 tokens de entrada (110,080 de caché), 30,808 de salida, USD 0.0504 a precio de lista;
+  0.72 s de media por llamada en el contexto normal.
+- **Defecto encontrado en la corrida real:** con las funciones habilitadas en la respuesta final, gpt-oss intentaba
+  «llamar» a una herramienta `json` para entregar su respuesta y Groq devolvía 400 `tool_use_failed`. La ronda final
+  ahora va con `tool_choice: none`; una prueba lo exige contra el servidor falso y la línea base no cambió.
+- **Hallazgo:** el LLM empata en clasificación porque se abstiene cuando una exclusión aplica o la cobertura no está
+  contratada; es decir, decide en lugar de proponer, por una regla ambigua del prompt («si ninguna aplica, usa
+  null»). Corregirla y volver a medir es trabajo de la etapa 2 (`eval/analisis-groq.md`).

@@ -60,7 +60,7 @@ public sealed record CostoDeLista(
 /// ritmo sólo para un LLM real (en la línea base serían ruido).</summary>
 public sealed record Informe(
     string Proveedor, string Modelo, string HuellaDelConjunto, IReadOnlyList<Corrida> Corridas, string? Fecha = null,
-    string? Ajustes = null, CostoDeLista? Costo = null, double? SegundosDeEsperaPorRitmo = null);
+    string? Ajustes = null, CostoDeLista? Costo = null, double? SegundosDeEsperaPorRitmo = null, bool? Parcial = null);
 
 /// <summary>
 /// Corre el conjunto con la composición REAL de Application (en memoria): alta del titular, emisión de la póliza,
@@ -73,7 +73,7 @@ public sealed record Informe(
 /// </remarks>
 public sealed class Evaluador(
     string carpetaEval, OpcionesDelAsistente opciones, IChatCompletionService? chat = null, string? cache = null,
-    Func<IChatCompletionService, IChatCompletionService>? ritmo = null)
+    Func<IChatCompletionService, IChatCompletionService>? ritmo = null, bool soloCache = false)
 {
     private static readonly DateTimeOffset Ahora = new(2026, 6, 15, 17, 0, 0, TimeSpan.Zero);
 
@@ -92,7 +92,8 @@ public sealed class Evaluador(
         _todos = Conjunto.Casos(carpetaEval);
         var casos = _todos.Take(limite ?? int.MaxValue).ToList();
         var caratulas = Conjunto.Caratulas(carpetaEval);
-        var espia = new ChatEspia(chat ?? Fabrica.Chat(opciones));
+        // Sólo de la caché (informe parcial): ningún caso nuevo llega al modelo.
+        var espia = new ChatEspia(soloCache ? new SinModelo() : chat ?? Fabrica.Chat(opciones));
         _ritmo = (ritmo ?? (opciones.Proveedor == "groq"
             ? s => new ChatConRitmo(s, opciones.SolicitudesPorMinuto, opciones.TokensPorMinuto)
             : s => s))(espia);
@@ -122,11 +123,18 @@ public sealed class Evaluador(
         await using var proveedor = servicios.BuildServiceProvider();
 
         var resultados = new List<ResultadoDeCaso>();
+        var medidos = new List<CasoDeEvaluacion>();
         foreach (var (caso, i) in casos.Select((c, i) => (c, i)))
         {
             if (guardados.TryGetValue($"{contexto}/{caso.Id}", out var guardado))
             {
                 resultados.Add(guardado);
+                medidos.Add(caso);
+                continue;
+            }
+
+            if (soloCache)
+            {
                 continue;
             }
 
@@ -136,12 +144,39 @@ public sealed class Evaluador(
             var propuesta = await ProponerAsync(proveedor, caso, caratula, ct);
             var resultado = Calificar(caso, propuesta, espia, conLatencia: opciones.Proveedor != "extractivo");
             resultados.Add(resultado);
+            medidos.Add(caso);
             Guardar(contexto, resultado);
             progreso?.Invoke($"{contexto} {caso.Id}: {propuesta.Tipo?.ToString() ?? "—"} {propuesta.Clausula ?? "—"} " +
                              $"({propuesta.LatenciaMs} ms)");
         }
 
-        return new Corrida(contexto, Medir(casos, resultados), resultados);
+        return new Corrida(contexto, medidos.Count == 0 ? Vacia() : Medir(medidos, resultados), resultados);
+    }
+
+    private static Metricas Vacia() => new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null);
+
+    /// <summary>Las métricas de un subconjunto de casos ya calificados (para comparar contra un informe parcial con
+    /// los mismos casos).</summary>
+    public static Metricas MedirSubconjunto(IReadOnlyList<CasoDeEvaluacion> casos, IReadOnlyList<ResultadoDeCaso> todos)
+    {
+        var porId = todos.ToDictionary(r => r.Id, StringComparer.Ordinal);
+        var presentes = casos.Where(c => porId.ContainsKey(c.Id)).ToList();
+        return presentes.Count == 0 ? Vacia() : Medir(presentes, presentes.Select(c => porId[c.Id]).ToList());
+    }
+
+    private sealed class SinModelo : IChatCompletionService
+    {
+        public IReadOnlyDictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
+
+        public Task<IReadOnlyList<ChatMessageContent>> GetChatMessageContentsAsync(ChatHistory chatHistory,
+            PromptExecutionSettings? executionSettings = null, Kernel? kernel = null,
+            CancellationToken cancellationToken = default) =>
+            throw new InvalidOperationException("Informe desde la caché: no se llama al modelo.");
+
+        public IAsyncEnumerable<StreamingChatMessageContent> GetStreamingChatMessageContentsAsync(ChatHistory chatHistory,
+            PromptExecutionSettings? executionSettings = null, Kernel? kernel = null,
+            CancellationToken cancellationToken = default) =>
+            throw new InvalidOperationException("Informe desde la caché: no se llama al modelo.");
     }
 
     private Dictionary<string, ResultadoDeCaso> LeerCache()

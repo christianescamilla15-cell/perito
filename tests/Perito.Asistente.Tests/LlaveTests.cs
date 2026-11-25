@@ -40,6 +40,14 @@ public sealed class LlaveTests : IDisposable
         Assert.DoesNotContain(GroqProtocoloTests.LlaveFalsa, JsonSerializer.Serialize(opciones), StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void La_guarda_reconoce_la_llave_en_un_texto_sin_revelarla()
+    {
+        var llave = SecretoApi.De(GroqProtocoloTests.LlaveFalsa);
+        Assert.True(llave.ApareceEn("x" + GroqProtocoloTests.LlaveFalsa + "y"));
+        Assert.False(llave.ApareceEn("informe sin llave"));
+    }
+
     /// <summary>Permisos POSIX: el CI corre en Linux.</summary>
     [Fact]
     public void Un_archivo_que_otros_pueden_leer_se_rechaza_sin_mostrar_la_llave()
@@ -84,10 +92,41 @@ public sealed class LlaveTests : IDisposable
         var todo = string.Join("\n", consola.ToString(), errores.ToString(), File.ReadAllText(cache),
             File.ReadAllText(Path.Join(salida, "groq.json")), File.ReadAllText(Path.Join(salida, "groq.md")));
         Assert.DoesNotContain(GroqProtocoloTests.LlaveFalsa, todo, StringComparison.Ordinal);
-        Assert.DoesNotContain("gsk_", todo, StringComparison.Ordinal);
         Assert.Contains("openai/gpt-oss-120b", todo, StringComparison.Ordinal);
         Assert.Contains("contra la línea base determinista", File.ReadAllText(Path.Join(salida, "groq.md")),
             StringComparison.Ordinal);
+    }
+
+    /// <summary>Si un límite corta la corrida, el informe se arma con lo guardado, sin llamar al modelo, y dice que es
+    /// PARCIAL con su N; la línea base se compara sobre los mismos casos.</summary>
+    [Fact]
+    public async Task El_informe_desde_la_cache_es_parcial_dice_su_N_y_no_llama_al_modelo()
+    {
+        var llave = Archivo($"GROQ_API_KEY={GroqProtocoloTests.LlaveFalsa}\n", UnixFileMode.UserRead | UnixFileMode.UserWrite);
+        var servidor = new OpenAIFalso();
+        using var http = new HttpClient(servidor);
+        using var consola = new StringWriter();
+        using var errores = new StringWriter();
+        var salida = Path.Join(_carpeta, "informe");
+        var cache = Path.Join(_carpeta, "casos.jsonl");
+        string[] comunes = ["--proveedor", "groq", "--fecha", "2026-11-25", "--archivo-de-llave", llave,
+            "--endpoint", "https://groq.prueba/openai/v1", "--salida", salida, "--cache", cache, "--rpm", "6000",
+            "--tpm", "10000000", "--eval", CorridaDelConjunto.Eval];
+        Assert.Equal(0, await Program.EjecutarAsync([.. comunes, "--casos", "2", "--contextos", "normal"], consola,
+            errores, http));
+        var llamadas = servidor.Solicitudes.Count;
+
+        Assert.Equal(0, await Program.EjecutarAsync([.. comunes, "--solo-cache", "si"], consola, errores, http));
+
+        Assert.Equal(llamadas, servidor.Solicitudes.Count);
+        using var informe = JsonDocument.Parse(File.ReadAllText(Path.Join(salida, "groq.json")));
+        Assert.True(informe.RootElement.GetProperty("parcial").GetBoolean());
+        var n = informe.RootElement.GetProperty("corridas").EnumerateArray()
+            .Select(c => c.GetProperty("metricas").GetProperty("casos").GetInt32()).ToList();
+        Assert.Equal(new[] { 2, 0, 0 }, n);
+        var md = File.ReadAllText(Path.Join(salida, "groq.md"));
+        Assert.Contains("**PARCIAL.**", md, StringComparison.Ordinal);
+        Assert.Contains("| Casos (N) | 2 | 2 |", md, StringComparison.Ordinal);    // LLM y base sobre los mismos 2
     }
 
     [Fact]

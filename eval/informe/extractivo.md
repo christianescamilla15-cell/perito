@@ -4,6 +4,7 @@ Conjunto `eval/siniestros.jsonl` (huella `cd2b370fe53b2960`), 50 casos. Generado
 
 | Métrica | Normal | Vacio | Barajado |
 |---|---:|---:|---:|
+| Casos (N) | 50 | 50 | 50 |
 | Clasificación (tipo exacto) | 0.86 | 0.00 | 0.34 |
 | Cita correcta (cláusula exacta) | 0.86 | 0.00 | 0.34 |
 | Cobertura correcta | 0.90 | 0.00 | 0.38 |

@@ -114,11 +114,16 @@ public sealed class AsistenteDeTriaje(
         var historia = new ChatHistory(Prompt.Sistema);
         historia.AddUserMessage(Prompt.Mensaje(solicitud, contexto));
         var ajustes = Ejecucion.Ajustes(opciones);
+        var ajustesFinales = Ejecucion.AjustesFinales(opciones);
+        var conResultado = false;
 
         string? final = null;
         for (var ronda = 0; ronda <= opciones.RondasMaximas && final is null; ronda++)
         {
-            var respuesta = await chat.GetChatMessageContentAsync(historia, ajustes, kernel, limite.Token);
+            // Con el resultado de la función ya en la historia, la respuesta final va con tool_choice «none»: gpt-oss en
+            // Groq intentaba «llamar» a una herramienta «json» para dar su respuesta y el servidor devolvía 400.
+            var respuesta = await chat.GetChatMessageContentAsync(historia, conResultado ? ajustesFinales : ajustes,
+                kernel, limite.Token);
             var llamadas = FunctionCallContent.GetFunctionCalls(respuesta).ToList();
             if (llamadas.Count == 0)
             {
@@ -136,6 +141,7 @@ public sealed class AsistenteDeTriaje(
                 {
                     var resultado = await funcion.InvokeAsync(kernel, new KernelArguments(), limite.Token);
                     historia.Add(new FunctionResultContent(llamada, resultado).ToChatMessage());
+                    conResultado = true;
                 }
                 else
                 {
