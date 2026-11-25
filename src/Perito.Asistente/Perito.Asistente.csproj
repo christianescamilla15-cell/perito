@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Perito.Application\Perito.Application.csproj" />
     <PackageReference Include="Microsoft.SemanticKernel.Core" />
     <PackageReference Include="OllamaSharp" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" />
   </ItemGroup>
   <ItemGroup>
     <!-- Una sola fuente: el documento que se publica en docs/ es el corpus que se indexa. -->

@@ -53,11 +53,18 @@ public static class Composicion
 
         builder.Services.AgregarPerito(conexion,
             new OpcionesDeCifrado(cfg["Perito:Cifrado:LlaveActiva"] ?? "k1", llaves));
+        var proveedor = cfg["Perito:Asistente:Proveedor"] ?? "extractivo";
+        var groq = proveedor == "groq";
         builder.Services.AgregarAsistente(new OpcionesDelAsistente
         {
-            Proveedor = cfg["Perito:Asistente:Proveedor"] ?? "extractivo",
-            Modelo = cfg["Perito:Asistente:Modelo"] ?? "qwen2.5:1.5b",
-            Endpoint = cfg["Perito:Asistente:Endpoint"] ?? "http://127.0.0.1:11434",
+            Proveedor = proveedor,
+            Modelo = cfg["Perito:Asistente:Modelo"] ?? (groq ? "openai/gpt-oss-120b" : "qwen2.5:1.5b"),
+            Endpoint = cfg["Perito:Asistente:Endpoint"] ?? (groq ? Fabrica.EndpointDeGroq : "http://127.0.0.1:11434"),
+            // La llave de Groq se lee de un archivo con permisos 600, nunca de appsettings.
+            Llave = groq
+                ? SecretoApi.LeerDeArchivo(Requerido(cfg["Perito:Asistente:ArchivoDeLlave"], "Perito:Asistente:ArchivoDeLlave"),
+                    "GROQ_API_KEY")
+                : null,
         });
         if (cfg.GetValue("Perito:Salida:Habilitada", true))
         {

@@ -45,6 +45,20 @@ dotnet run --project src/Perito.Evaluacion -c Release -- --compuerta eval/umbral
 dotnet run --project src/Perito.Evaluacion -c Release -- --proveedor ollama --modelo qwen2.5:1.5b
 ```
 
+Con un LLM real por Groq (nunca en el CI). La llave la crea el dueño en la consola de Groq y vive sólo en un archivo
+con permisos 600; no se pasa por línea de comandos ni por variables de entorno del CI:
+
+```bash
+install -m 600 /dev/null ~/.config/perito/groq.env && "${EDITOR:-nano}" ~/.config/perito/groq.env   # GROQ_API_KEY=…
+dotnet run --project src/Perito.Evaluacion -c Release -- --proveedor groq --modelo openai/gpt-oss-120b \
+  --fecha "$(date +%F)" --usd-entrada 0.15 --usd-cache 0.075 --usd-salida 0.60
+```
+
+Escribe `eval/informe/groq.{json,md}` con la comparación contra la línea base. Respeta la capa gratuita (20
+solicitudes y 7,000 tokens por minuto por omisión: `--rpm`, `--tpm`); cada caso terminado queda en
+`eval/corridas/groq-casos.jsonl`. Si Groq corta por límite diario («corrida interrumpida … HTTP 429»), se vuelve a
+correr el mismo comando cuando se restablezca y sólo hace lo que faltó. Para empezar de cero, borre ese archivo.
+
 Si cambia una regla, el prompt o el corpus, el informe versionado cambia: se revisa el diff de cifras y se versiona
 en el mismo commit (el CI exige que coincidan).
 
