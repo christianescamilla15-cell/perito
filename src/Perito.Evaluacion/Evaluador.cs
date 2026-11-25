@@ -293,7 +293,7 @@ public sealed class Evaluador(
 
         var p = vp + fp == 0 ? 1 : vp / (double)(vp + fp);
         var r = vp + fn == 0 ? 1 : vp / (double)(vp + fn);
-        var f1 = p + r == 0 ? 0 : 2 * p * r / (p + r);
+        var f1 = p + r <= 0 ? 0 : 2 * p * r / (p + r);
         return (Math.Round(p, 4), Math.Round(r, 4), Math.Round(f1, 4));
     }
 

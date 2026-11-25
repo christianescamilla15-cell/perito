@@ -71,9 +71,9 @@ public class OllamaProtocoloTests
     public async Task Por_el_protocolo_de_Ollama_viajan_la_funcion_la_temperatura_y_su_resultado_sin_datos_personales()
     {
         var ollama = new OllamaFalso();
-        IChatCompletionService chat = new OllamaApiClient(
-            new HttpClient(ollama) { BaseAddress = new Uri("http://ollama.prueba:11434") }, "modelo-de-prueba")
-            .AsChatCompletionService();
+        using var http = new HttpClient(ollama) { BaseAddress = new Uri("http://ollama.prueba:11434") };
+        using var cliente = new OllamaApiClient(http, "modelo-de-prueba");
+        IChatCompletionService chat = cliente.AsChatCompletionService();
         var opciones = new OpcionesDelAsistente { Proveedor = "ollama", Modelo = "modelo-de-prueba" };
         var servicios = new ServiceCollection().AgregarPeritoEnMemoria(new AlmacenEnMemoria(),
             new RelojFijo(new DateTimeOffset(2026, 6, 15, 17, 0, 0, TimeSpan.Zero)));

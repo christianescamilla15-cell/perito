@@ -39,19 +39,13 @@ public sealed class SecretoApi
             throw new InvalidOperationException($"El archivo de la llave {ruta} debe tener permisos 600.");
         }
 
-        foreach (var linea in File.ReadLines(ruta).Select(l => l.Trim()))
-        {
-            if (linea.StartsWith(nombre + "=", StringComparison.Ordinal))
-            {
-                var valor = linea[(nombre.Length + 1)..].Trim().Trim('"', '\'');
-                if (valor.Length > 0)
-                {
-                    return new SecretoApi(valor);
-                }
-            }
-        }
-
-        throw new InvalidOperationException($"El archivo {ruta} no tiene una línea {nombre}=… con valor.");
+        var valor = File.ReadLines(ruta).Select(l => l.Trim())
+            .Where(l => l.StartsWith(nombre + "=", StringComparison.Ordinal))
+            .Select(l => l[(nombre.Length + 1)..].Trim().Trim('"', '\''))
+            .FirstOrDefault(v => v.Length > 0);
+        return valor is not null
+            ? new SecretoApi(valor)
+            : throw new InvalidOperationException($"El archivo {ruta} no tiene una línea {nombre}=… con valor.");
     }
 
     /// <summary>El valor, sólo para el encabezado de autorización.</summary>

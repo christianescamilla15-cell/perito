@@ -189,14 +189,10 @@ public class ArquitecturaTests
         {
             foreach (var metodo in tipo.Methods.Where(m => m.HasBody))
             {
-                foreach (var i in metodo.Body.Instructions)
-                {
-                    if ((i.OpCode.FlowControl == FlowControl.Call || i.OpCode.Code == Code.Newobj) &&
-                        i.Operand is MethodReference llamada)
-                    {
-                        lista.Add((NombreExterno(tipo), metodo.Name, llamada));
-                    }
-                }
+                lista.AddRange(metodo.Body.Instructions
+                    .Where(i => i.OpCode.FlowControl == FlowControl.Call || i.OpCode.Code == Code.Newobj)
+                    .Select(i => i.Operand).OfType<MethodReference>()
+                    .Select(llamada => (NombreExterno(tipo), metodo.Name, llamada)));
             }
         }
 

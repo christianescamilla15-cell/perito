@@ -27,7 +27,7 @@ public static class Fabrica
     {
         "extractivo" => new ModeloExtractivo(),
         // El conector de Ollama de SK (alfa) recomienda el cliente de OllamaSharp como IChatClient adaptado a SK.
-        "ollama" => new OllamaApiClient(new Uri(opciones.Endpoint), opciones.Modelo).AsChatCompletionService(),
+        "ollama" => new ServicioOllama(new OllamaApiClient(new Uri(opciones.Endpoint), opciones.Modelo)),
         "groq" => Groq(opciones),
         _ => throw new InvalidOperationException(
             $"Proveedor «{opciones.Proveedor}» no soportado: use «extractivo», «ollama» o «groq».")
@@ -101,4 +101,29 @@ public static class Ejecucion
     /// <summary>Nombre del modelo que queda en la propuesta.</summary>
     public static string NombreDelModelo(OpcionesDelAsistente opciones) =>
         opciones.Proveedor == "extractivo" ? ModeloExtractivo.Nombre : opciones.Modelo;
+}
+
+/// <summary>El servicio de chat de Ollama dueño de su cliente HTTP (lo libera al liberarse el contenedor).</summary>
+public sealed class ServicioOllama(OllamaApiClient cliente) : IChatCompletionService, IDisposable
+{
+    private readonly OllamaApiClient _cliente = cliente;
+    private readonly IChatCompletionService _servicio = cliente.AsChatCompletionService();
+
+    /// <inheritdoc />
+    public IReadOnlyDictionary<string, object?> Attributes => _servicio.Attributes;
+
+    /// <inheritdoc />
+    public Task<IReadOnlyList<ChatMessageContent>> GetChatMessageContentsAsync(ChatHistory chatHistory,
+        PromptExecutionSettings? executionSettings = null, Kernel? kernel = null,
+        CancellationToken cancellationToken = default) =>
+        _servicio.GetChatMessageContentsAsync(chatHistory, executionSettings, kernel, cancellationToken);
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<StreamingChatMessageContent> GetStreamingChatMessageContentsAsync(ChatHistory chatHistory,
+        PromptExecutionSettings? executionSettings = null, Kernel? kernel = null,
+        CancellationToken cancellationToken = default) =>
+        _servicio.GetStreamingChatMessageContentsAsync(chatHistory, executionSettings, kernel, cancellationToken);
+
+    /// <inheritdoc />
+    public void Dispose() => _cliente.Dispose();
 }

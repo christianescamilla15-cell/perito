@@ -64,8 +64,9 @@ public sealed class LlaveTests : IDisposable
     {
         var llave = Archivo($"GROQ_API_KEY={GroqProtocoloTests.LlaveFalsa}\n", UnixFileMode.UserRead | UnixFileMode.UserWrite);
         var servidor = new OpenAIFalso();
-        var consola = new StringWriter();
-        var errores = new StringWriter();
+        using var consola = new StringWriter();
+        using var errores = new StringWriter();
+        using var http = new HttpClient(servidor);
         var salida = Path.Join(_carpeta, "informe");
         var cache = Path.Join(_carpeta, "casos.jsonl");
 
@@ -75,7 +76,7 @@ public sealed class LlaveTests : IDisposable
             "--endpoint", "https://groq.prueba/openai/v1", "--salida", salida, "--cache", cache, "--rpm", "6000",
             "--tpm", "10000000", "--usd-entrada", "0.15", "--usd-salida", "0.60",
             "--eval", CorridaDelConjunto.Eval,
-        ], consola, errores, new HttpClient(servidor));
+        ], consola, errores, http);
 
         Assert.Equal(0, codigo);
         Assert.Equal(12, servidor.Solicitudes.Count);                 // 2 casos × 3 contextos × 2 llamadas
@@ -95,14 +96,16 @@ public sealed class LlaveTests : IDisposable
         var llave = Archivo($"GROQ_API_KEY={GroqProtocoloTests.LlaveFalsa}\n", UnixFileMode.UserRead | UnixFileMode.UserWrite);
         var servidor = new OpenAIFalso();
         servidor.Errores.Enqueue((HttpStatusCode.Unauthorized, null));
-        var errores = new StringWriter();
+        using var errores = new StringWriter();
+        using var consola = new StringWriter();
+        using var http = new HttpClient(servidor);
 
         var codigo = await Program.EjecutarAsync(
         [
             "--proveedor", "groq", "--fecha", "2026-11-25", "--casos", "1", "--archivo-de-llave", llave,
             "--endpoint", "https://groq.prueba/openai/v1", "--salida", Path.Join(_carpeta, "informe"),
             "--cache", Path.Join(_carpeta, "casos.jsonl"), "--eval", CorridaDelConjunto.Eval,
-        ], new StringWriter(), errores, new HttpClient(servidor));
+        ], consola, errores, http);
 
         Assert.Equal(3, codigo);
         Assert.Contains("HTTP 401", errores.ToString(), StringComparison.Ordinal);
@@ -113,9 +116,10 @@ public sealed class LlaveTests : IDisposable
     [Fact]
     public async Task Sin_fecha_no_corre_un_llm_real()
     {
-        var errores = new StringWriter();
+        using var errores = new StringWriter();
+        using var consola = new StringWriter();
         var codigo = await Program.EjecutarAsync(["--proveedor", "ollama", "--eval", CorridaDelConjunto.Eval],
-            new StringWriter(), errores);
+            consola, errores);
         Assert.Equal(2, codigo);
         Assert.Contains("--fecha", errores.ToString(), StringComparison.Ordinal);
     }
