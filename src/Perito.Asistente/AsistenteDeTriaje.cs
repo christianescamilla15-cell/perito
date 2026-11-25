@@ -109,10 +109,13 @@ public sealed class AsistenteDeTriaje(
             historia.Add(respuesta);
             foreach (var llamada in llamadas)
             {
-                var nombre = $"{llamada.PluginName}-{llamada.FunctionName}";
-                if (Permitidas.Contains(nombre))
+                var funcion = Resolver(kernel, llamada);
+                var nombre = funcion is null ? $"{llamada.PluginName}-{llamada.FunctionName}".TrimStart('-')
+                    : $"{funcion.PluginName}-{funcion.Name}";
+                if (funcion is not null && Permitidas.Contains(nombre))
                 {
-                    historia.Add((await llamada.InvokeAsync(kernel, limite.Token)).ToChatMessage());
+                    var resultado = await funcion.InvokeAsync(kernel, new KernelArguments(), limite.Token);
+                    historia.Add(new FunctionResultContent(llamada, resultado).ToChatMessage());
                 }
                 else
                 {
@@ -131,6 +134,24 @@ public sealed class AsistenteDeTriaje(
         return new PropuestaGenerada(opciones.Proveedor, Ejecucion.NombreDelModelo(opciones), leida.Tipo,
             leida.Clausula, leida.Datos, leida.Exclusiones, leida.Senales, leida.Justificacion, recuperadas,
             observaciones, reloj.ElapsedMilliseconds);
+    }
+
+    /// <summary>
+    /// La función del kernel que pide el modelo. Con los conectores de SK llega como complemento + función; con el
+    /// adaptador de IChatClient (OllamaSharp) llega sólo el nombre «complemento_funcion» (defecto encontrado por
+    /// OllamaProtocoloTests: la lista blanca la rechazaba y el modelo nunca recibía la carátula).
+    /// </summary>
+    private static KernelFunction? Resolver(Kernel kernel, FunctionCallContent llamada)
+    {
+        if (kernel.Plugins.TryGetFunction(llamada.PluginName, llamada.FunctionName, out var funcion))
+        {
+            return funcion;
+        }
+
+        return kernel.Plugins.SelectMany(p => p.Select(f => (p.Name, Funcion: f)))
+            .Where(x => llamada.FunctionName == $"{x.Name}_{x.Funcion.Name}" ||
+                        llamada.FunctionName == $"{x.Name}-{x.Funcion.Name}")
+            .Select(x => x.Funcion).FirstOrDefault();
     }
 
     /// <summary>Lee el JSON de la respuesta con tolerancia: el primer objeto del texto, campos opcionales.</summary>

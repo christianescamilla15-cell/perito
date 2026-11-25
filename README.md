@@ -21,13 +21,13 @@ Etapa 1 de 4 ([`docs/PLAN.md`](docs/PLAN.md)).
 | Sin datos personales donde no deben estar | sin texto claro en la base (AES-256-GCM); cero datos personales conocidos en los prompts de 50 casos × 3 contextos; anonimizar no deja rastro en ninguna tabla; los eventos no tienen campos de texto libre |
 | El RAG importa (control negativo) | con contexto vacío la cita cae de 0.86 a 0.00 y con contexto barajado a 0.34 |
 
-**269 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
+**271 pruebas** en 6 proyectos, todas en verde con advertencias como errores y candados de NuGet bloqueados:
 
 | Proyecto | Pruebas | Qué cubre |
 |---|---:|---|
 | `Perito.Domain.Tests` | 152 | reglas, matriz de transiciones, catálogo contra las condiciones, la tabla de reglas contra las pruebas, privacidad y seudonimizador |
 | `Perito.Application.Tests` | 32 | casos de uso con almacén en memoria (copias por sesión), propone y no decide, validador de propuestas, finalidad y anonimización |
-| `Perito.Asistente.Tests` | 37 | corpus, BM25, prompt, lista blanca de funciones, rondas, lectura tolerante, línea base y la compuerta de la evaluación |
+| `Perito.Asistente.Tests` | 39 | corpus, BM25, prompt, lista blanca de funciones, rondas, lectura tolerante, línea base, la ruta de Ollama contra su protocolo HTTP y la compuerta de la evaluación |
 | `Perito.Infrastructure.Tests` | 23 | PostgreSQL 16 real por Testcontainers: ida y vuelta, cifrado en reposo, concurrencia, bandeja de salida, idempotencia, despachadores concurrentes |
 | `Perito.Api.Tests` | 12 | API real sobre PostgreSQL: 401/403, flujo completo por HTTP, finalidad, contrato de errores, límite 429, trabajador → tablero, arranque sin secretos |
 | `Perito.Architecture.Tests` | 13 | capas (NetArchTest) y garantías en el IL (Mono.Cecil): asistente sin comandos, seudonimizador único, reloj único |
@@ -49,7 +49,13 @@ Línea base determinista (`extractivo`, no es un LLM; es la compuerta del CI) �
 | Exclusiones: precisión / exhaustividad | 1.00 / 0.45 | — / 0.00 | 1.00 / 0.09 |
 | Datos personales en los prompts | 0 | 0 | 0 |
 
-<!-- OLLAMA -->
+**Con un LLM real (Ollama): no se corrió en este corte.** Ollama no estaba instalado en la máquina de trabajo, el disco
+estaba al 99 % y la descarga iba a ~350 KB/s, así que no hay cifras de un modelo que reportar. Lo que sí está probado
+es la ruta del proveedor `ollama` de punta a punta contra un servidor que habla el protocolo HTTP de Ollama (sin
+modelo): herramienta, temperatura 0 y resultado de la función viajan sin datos personales. Esa prueba encontró y
+corrigió un defecto real (la función llegaba con otro nombre y la lista blanca la rechazaba). El comando para correr
+la evaluación con un modelo chico está en el [RUNBOOK](RUNBOOK.md#evaluación-del-asistente); su informe irá a
+`eval/informe/ollama-<modelo>.md`, aparte de la compuerta.
 
 Límites honestos: el conjunto, el corpus y la línea base los escribió la misma persona; la primera corrida dio datos
 F1 0.85 y un solo ajuste (la negación se tomaba de otra frase) la llevó a 0.86 ([ADR 0007](docs/adr/0007-evaluacion-versionada-con-control-negativo.md)).

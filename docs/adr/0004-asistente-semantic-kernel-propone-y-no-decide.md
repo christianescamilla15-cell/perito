@@ -28,3 +28,10 @@ ninguna decisión se toma sólo con un tratamiento automatizado.
   aceptar una propuesta falsa termina en el dictamen que dictan las reglas; en el IL, el asistente no crea comandos
   ni cambia agregados (y la prueba falla si se inyecta uno).
 - La calidad del modelo se mide aparte (ADR 0007); la compuerta del CI usa la línea base determinista.
+- La ruta de Ollama se prueba contra un servidor que habla su protocolo HTTP (`/api/chat`) sin modelo: viajan la
+  herramienta, `temperature: 0` y el resultado de la función, sin datos personales. Esa prueba encontró un defecto:
+  con el adaptador de `IChatClient` la llamada llega como `poliza_coberturas_contratadas` sin complemento, la lista
+  blanca la rechazaba y el modelo nunca recibía la carátula; ahora la función se resuelve por su nombre canónico o
+  el del adaptador.
+- No hubo corrida con un modelo real en este corte: Ollama no está instalado en la máquina de trabajo, el disco
+  estaba al 99 % y la descarga iba a ~350 KB/s. El comando está en el RUNBOOK.
